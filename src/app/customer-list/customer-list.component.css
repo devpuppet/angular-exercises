@@ -1,0 +1,13 @@
+table {
+    border: 1px solid;
+    border-radius: 10px;
+    width: 50%;
+}
+
+tr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,3 +1,7 @@
 img {
     display: block
 }
+
+* {
+    font-family: sans-serif;
+}

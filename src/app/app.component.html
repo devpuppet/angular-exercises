@@ -30,6 +30,7 @@
 <h3>Event binding</h3>
 <p>{{ inputValue }}</p>
 <div>Event payload: <input (input)="doSomething($event)"></div>
+<div>'change' event (hit Enter or move focus away): <input type="text" (change)="handleChange($event)"></div>
 <div>Using template reference variable: <input #el (input)="doSomethingElse(el)"></div>
 <div>keyup event: <input (keyup)="inputValue= $any($event.target).value"></div>
 <div>Listen for 'Enter' key event: <input (keyup.enter)="inputValue=$any($event.target).value"></div>
@@ -61,3 +62,10 @@
     </div>
 </div>
 
+<div>Angular Change Event: <input type="text" ngModel (ngModelChange)="nameChanged($event)"></div>
+
+<div>Nested components:
+    <div>
+        <app-customer-list></app-customer-list>
+    </div>
+</div>

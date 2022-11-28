@@ -44,6 +44,14 @@ export class AppComponent {
   clearName() {
     this.name2= '';
   }
+
+  nameChanged(event: Event) {
+    console.log("nameChanged() event: ", event);
+  }
+
+  handleChange(event: Event) {
+    console.log("'change' event has been fired", event);
+  }
 }
 
 class Item {
