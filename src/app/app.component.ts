@@ -22,6 +22,7 @@ export class AppComponent {
   name2 = 'Basic name';
   name3 = 'More basic name';
   @Input() count = 0;
+  number = '';
 
   public closeMe() {
     console.log('Close button clicked!');

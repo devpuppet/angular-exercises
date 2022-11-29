@@ -69,3 +69,12 @@
         <app-customer-list></app-customer-list>
     </div>
 </div>
+
+<div>ngSwitch Structural Directive:
+    <input style="width:min-content;" type="text" [value]="number" (input)="number=$any($event.target).value" placeholder="Enter number '1' or '2'">
+    <div [ngSwitch]="number">
+        <div *ngSwitchCase="1">One</div>
+        <div *ngSwitchCase="2">Two</div>
+        <div *ngSwitchDefault>Something different than 1 or 2</div>
+    </div>
+</div>
