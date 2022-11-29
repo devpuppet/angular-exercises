@@ -23,6 +23,7 @@ export class AppComponent {
   name3 = 'More basic name';
   @Input() count = 0;
   number = '';
+  ngIfCondition = true;
 
   public closeMe() {
     console.log('Close button clicked!');

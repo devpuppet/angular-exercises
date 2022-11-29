@@ -64,17 +64,27 @@
 
 <div>Angular Change Event: <input type="text" ngModel (ngModelChange)="nameChanged($event)"></div>
 
-<div>Nested components:
+<h3>Components</h3>
+
+<div>Nested components with ngFor Structural Directive:
     <div>
         <app-customer-list></app-customer-list>
     </div>
 </div>
+
+<h3>Directives</h3>
 
 <div>ngSwitch Structural Directive:
     <input style="width:min-content;" type="text" [value]="number" (input)="number=$any($event.target).value" placeholder="Enter number '1' or '2'">
     <div [ngSwitch]="number">
         <div *ngSwitchCase="1">One</div>
         <div *ngSwitchCase="2">Two</div>
-        <div *ngSwitchDefault>Something different than 1 or 2</div>
+        <div *ngSwitchDefault>Something different than 1 or 2 is entered above</div>
     </div>
+</div>
+<br>
+
+<div>ngIf Structural Directive
+    <input type="checkbox" [checked]="ngIfCondition" (input)="ngIfCondition=$any($event.target).checked">
+    <div *ngIf='ngIfCondition'>This is displayed depending if above checkbox is checked</div>
 </div>
