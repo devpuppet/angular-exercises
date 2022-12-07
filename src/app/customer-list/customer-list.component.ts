@@ -19,4 +19,11 @@ export class CustomerListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // When you add/remove item, Angular will update only the related node, not the entire list - no problem
+  // When list is fetched from BE, Angular refreshes entire list because the ref3erences changed - performance problem
+  // Solution: use trackBy function to tell Angular how to indentify similar elements and not recreate them when not needed
+  trackBy(index: number, customer: Customer) {
+    return customer.id;
+  }
+
 }

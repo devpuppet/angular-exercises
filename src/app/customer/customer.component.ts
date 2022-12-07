@@ -9,6 +9,16 @@ import { Customer } from './model/customer';
 export class CustomerComponent implements OnInit {
 
   @Input()
+  isOdd!: boolean;
+  @Input()
+  isEven!: boolean;
+  @Input()
+  isFirst!: boolean;
+  @Input()
+  isLast!: boolean;
+  @Input()
+  index!: number;
+  @Input()
   customer!: Customer;
 
   constructor() { }

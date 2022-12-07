@@ -6,8 +6,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let customer of customers;">
-                <app-customer [customer]='customer'></app-customer>
+            <tr *ngFor="let customer of customers; trackBy:trackBy; let i = index; let o=odd; let e=even; let first=first; let last=last">
+                <app-customer [customer]='customer' [index]="i" [isOdd]="o" [isEven]="e" [isFirst]="first" [isLast]="last"></app-customer>
             </tr>
         </tbody>
     </table>

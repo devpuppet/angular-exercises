@@ -1,7 +1,9 @@
-<div class="container">
+<div class="container"  [ngClass]="{ odd: isOdd, even: isEven}">
     <div>
-        <div>{{ customer.id }}</div>
+        <div *ngIf="isFirst">First item</div>
+        <div>{{ index }}</div>
         <div>{{ customer.name }}</div>
         <div>{{ customer.city }}</div>
+        <div *ngIf="isLast">Last item</div>
     </div>
 </div>
