@@ -5,3 +5,7 @@ img {
 * {
     font-family: sans-serif;
 }
+
+.big-text {
+    font-size: 24px;
+}

@@ -88,3 +88,11 @@
     <input type="checkbox" [checked]="ngIfCondition" (input)="ngIfCondition=$any($event.target).checked">
     <div *ngIf='ngIfCondition'>This is displayed depending if above checkbox is checked</div>
 </div>
+
+<div>ngClass Attribute Directive:
+    <label [ngClass]="'big-text'">This text should be big!</label>
+</div>
+
+<div>ngStyle Attribute Directive:
+    <label [ngStyle]="{'color': 'blue', 'font-weight': 'bold'}">styled text!</label>
+</div>
