@@ -80,7 +80,22 @@
         <div *ngSwitchCase="1">One</div>
         <div *ngSwitchCase="2">Two</div>
         <div *ngSwitchDefault>Something different than 1 or 2 is entered above</div>
+        <div *ngSwitchDefault>Maybe consider entering 1 or 2</div>
     </div>
+</div>
+<div>ngSwitch Structural Directive with ng-template:
+    <input style="width:min-content;" type="text" [value]="number" (input)="number=$any($event.target).value" placeholder="Enter number '1' or '2'">
+    <ng-container [ngSwitch]="number">
+        <ng-container *ngSwitchCase="1">
+            <ng-container *ngTemplateOutlet="template1"></ng-container>
+        </ng-container>
+        <ng-container *ngSwitchCase="2">
+            <ng-container *ngTemplateOutlet="template2"></ng-container>
+        </ng-container>
+        <ng-template #template1>The number is 1</ng-template>
+        <ng-template #template2>The number is 2</ng-template>
+        <ng-container *ngSwitchDefault>Please provide a number 1 or 2</ng-container>
+    </ng-container>
 </div>
 <br>
 

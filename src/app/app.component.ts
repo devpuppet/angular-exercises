@@ -24,6 +24,7 @@ export class AppComponent {
   @Input() count = 0;
   number = '';
   ngIfCondition = true;
+  isNumberOdd!: boolean;
 
   public closeMe() {
     console.log('Close button clicked!');
@@ -53,6 +54,10 @@ export class AppComponent {
 
   handleChange(event: Event) {
     console.log("'change' event has been fired", event);
+  }
+
+  isOdd(event: HTMLInputElement): boolean {
+    return +event.value % 2 === 0;
   }
 }
 
