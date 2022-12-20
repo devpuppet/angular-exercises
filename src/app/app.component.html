@@ -99,9 +99,23 @@
 </div>
 <br>
 
-<div>ngIf Structural Directive
+<div>ngIf/else Structural Directive
     <input type="checkbox" [checked]="ngIfCondition" (input)="ngIfCondition=$any($event.target).checked">
-    <div *ngIf='ngIfCondition'>This is displayed depending if above checkbox is checked</div>
+    <div *ngIf='ngIfCondition; else elseBlock'>This is displayed when above checkbox is checked</div>
+    <ng-template #elseBlock>
+        <div>Above checkbox is not checked</div>
+    </ng-template>
+</div>
+
+<div>ngIf/then/else Structural Directive
+    <input type="checkbox" [checked]="ngIfCondition" (input)="ngIfCondition=$any($event.target).checked">
+    <div *ngIf='ngIfCondition; then thenBlock else elseBlock'>This is not shown</div>
+    <ng-template #thenBlock>
+        <div>Above checkbox is checked</div>
+    </ng-template>
+    <ng-template #elseBlock>
+        <div>Above checkbox is not checked</div>
+    </ng-template>
 </div>
 
 <div>ngClass Attribute Directive:
