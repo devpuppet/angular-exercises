@@ -25,6 +25,10 @@ export class AppComponent {
   number = '';
   ngIfCondition = true;
   isNumberOdd!: boolean;
+  cssObject = {
+    bigText: true,
+    blueText: true
+  }
 
   public closeMe() {
     console.log('Close button clicked!');

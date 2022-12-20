@@ -119,7 +119,10 @@
 </div>
 
 <div>ngClass Attribute Directive:
-    <label [ngClass]="'big-text'">This text should be big!</label>
+    <div [ngClass]="'bigText'">This text should be big!</div>
+    <div [ngClass]="['bigText','blueText']">This text should be big and blue!</div>
+    <div [ngClass]="{'bigText':false,'blueText':true}">This text should be blue!</div>
+    <div [ngClass]="cssObject">This text should be big and blue!</div>
 </div>
 
 <div>ngStyle Attribute Directive:
