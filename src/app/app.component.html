@@ -127,4 +127,11 @@
 
 <div>ngStyle Attribute Directive:
     <label [ngStyle]="{'color': 'blue', 'font-weight': 'bold'}">styled text!</label>
+    <div>
+        <input type="text" (input)="styleExample=$any($event.target).value" [value]="styleExample" placeholder="Type color"/>
+        <input type="number" (input)="fontSize=$any($event.target).value" [value]="fontSize" placeholder="Font size"/>
+    </div>
+    
+    <div [ngStyle]="{'color': styleExample, 'font-size.px': fontSize}">This text is coloured with above color! And has {{ fontSize }} pixels size!</div>
+    <div [ngStyle]="styleClass">This is styled with StyleClass</div>
 </div>

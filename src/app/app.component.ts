@@ -28,7 +28,10 @@ export class AppComponent {
   cssObject = {
     bigText: true,
     blueText: true
-  }
+  };
+  styleExample = '';
+  fontSize = 16;
+  styleClass = new StyleClass();
 
   public closeMe() {
     console.log('Close button clicked!');
@@ -67,4 +70,9 @@ export class AppComponent {
 
 class Item {
   constructor(public readonly name: string) {}
+}
+
+class StyleClass {
+  'color' = 'purple';
+  'font-size.px' = 20;
 }
