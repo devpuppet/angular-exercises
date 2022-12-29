@@ -1,4 +1,10 @@
 <div>
+    <div>
+        <input type="text" [value]="name" (input)="name=$any($event.target).value" placeholder="Name"/>
+        <input type="text" [value]="city" (input)="city=$any($event.target).value" placeholder="City"/>
+        <button (click)="addCustomer()">Add</button>
+        <button (click)="refresh()">Refresh</button>
+    </div>
     <table>
         <thead>
             <tr>
@@ -6,7 +12,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let customer of customers; trackBy:trackBy; let i = index; let o=odd; let e=even; let first=first; let last=last">
+            <tr *ngFor="let customer of customers; trackBy:trackByMultiple; let i = index; let o=odd; let e=even; let first=first; let last=last">
                 <app-customer [customer]='customer' [index]="i" [isOdd]="o" [isEven]="e" [isFirst]="first" [isLast]="last"></app-customer>
             </tr>
         </tbody>

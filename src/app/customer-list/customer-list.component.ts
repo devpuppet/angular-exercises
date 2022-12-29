@@ -7,16 +7,28 @@ import { Customer } from '../customer/model/customer';
   styleUrls: ['./customer-list.component.css']
 })
 export class CustomerListComponent implements OnInit {
+  name: string = '';
+  city: string = '';
 
-  customers: Customer[] = [
-    { id: 1, name: 'Kamil Kukielka', city: 'Krakow' },
-    { id: 2, name: 'John Johnson', city: 'New York' },
-    { id: 3, name: 'Tom Thompson', city: 'London' }
-  ];
+  customers: Customer[] = [];
 
   constructor() { }
 
   ngOnInit(): void {
+    this.refresh();
+  }
+
+  public refresh() {
+    console.log('Refresh');
+    this.customers = [{ id: Date.now() + 1, name: 'Kamil Kukielka', city: 'Krakow' },
+    { id: Date.now() + 2, name: 'John Johnson', city: 'New York' },
+    { id: Date.now() + 3, name: 'Tom Thompson', city: 'London' }];
+  }
+
+  public addCustomer() {
+    this.customers.push({id: Date.now(), name: this.name, city: this.city});
+    this.name = '';
+    this.city = '';
   }
 
   // When you add/remove item, Angular will update only the related node, not the entire list - no problem
@@ -24,6 +36,11 @@ export class CustomerListComponent implements OnInit {
   // Solution: use trackBy function to tell Angular how to indentify similar elements and not recreate them when not needed
   trackBy(index: number, customer: Customer) {
     return customer.id;
+  }
+
+  // You can also track by multiple fields in order to get unique id
+  trackByMultiple(index: number, customer: Customer) {
+    return customer.name + customer.city;
   }
 
 }
