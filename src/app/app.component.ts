@@ -33,6 +33,9 @@ export class AppComponent {
   fontSize = 16;
   styleClass = new StyleClass();
   customIf = true;
+  toDate = new Date();
+  decimalNumber = 123483.32123;
+  percentNumber = 0.45;
 
   public closeMe() {
     console.log('Close button clicked!');

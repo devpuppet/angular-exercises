@@ -157,3 +157,14 @@
 <div>
     <button customToggle>Click to toggle</button>
 </div>
+
+<h3>Pipes</h3>
+
+<div>
+    <p>Unformatted date: {{ toDate }}</p>
+    <p>Formatted date with uppercase chaining: {{ toDate | date:'dd MMMM yyyy' | uppercase }}</p>
+    <p>Slice pipe: {{ name3 | slice:0:name3.length-2 }}</p>
+    <p>Decimal/number pipe: {{ decimalNumber | number:'5.1-4' }}</p>
+    <p>Percent pipe: {{ percentNumber | percent:'1.2-2' }}</p>
+    <p>Currency pipe: {{ decimalNumber | currency:'PLN':true:'5.1-8' }}</p>
+</div>
