@@ -32,6 +32,7 @@ export class AppComponent {
   styleExample = '';
   fontSize = 16;
   styleClass = new StyleClass();
+  customIf = true;
 
   public closeMe() {
     console.log('Close button clicked!');

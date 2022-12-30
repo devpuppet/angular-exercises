@@ -135,3 +135,25 @@
     <div [ngStyle]="{'color': styleExample, 'font-size.px': fontSize}">This text is coloured with above color! And has {{ fontSize }} pixels size!</div>
     <div [ngStyle]="styleClass">This is styled with StyleClass</div>
 </div>
+
+<h3>Custom Directives</h3>
+<button [addClass]="'blue'">Blue button</button>
+
+<div>
+    <span>Click this button</span>
+    <input type="checkbox" [checked]="customIf" (input)="customIf=$any($event.target).checked">
+    <div *customIf="customIf">
+        Show me!
+    </div>
+    <div *ngIf="customIf">
+        Show me!
+    </div>
+</div>
+
+<div>
+    <button customTooltip toolTip="This tooltip should probably tell something useful">Custom Tooltip</button>
+</div>
+
+<div>
+    <button customToggle>Click to toggle</button>
+</div>

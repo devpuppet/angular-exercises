@@ -13,3 +13,19 @@ img {
 .blueText {
     color: blue;
 }
+
+.blue {
+    background-color: lightblue;
+}
+
+.toggle {
+    background-color: yellow;
+}
+
+.tooltip {
+    display: inline-block;
+    border-bottom: 1px dotted black;
+    position: fixed;
+    background-color: lightgray;
+    padding: 5px;
+}
