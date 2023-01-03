@@ -198,3 +198,13 @@
         </ul>
     </div>
 </div>
+
+<div>
+    <p><b>keyvalue pipe</b></p>
+    <p>Transforms object or map into an array of key-value pairs</p>
+    <ul>
+        <li *ngFor="let item of keyValueObject | keyvalue : orderByKeyDesc">
+            {{ item.key }} --> {{ item.value }}
+        </li>
+    </ul>
+</div>

@@ -1,3 +1,4 @@
+import { KeyValue } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -42,6 +43,14 @@ export class AppComponent {
   celsius = 0;
   hounds: Observable<any> = this.getHoundList();
   randomImage: Observable<any> = this.getRandomBreedImage();
+  keyValueObject = {
+    b: 123,
+    c: 'some text',
+    a: [1, 2, 3]
+  }
+  orderByKeyDesc = (a: KeyValue<string, any>, b: KeyValue<string, any>): number => {
+    return a.key > b.key ? -1 : 1;
+  }
 
   constructor(public http: HttpClient) {}
 
