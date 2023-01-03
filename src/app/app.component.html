@@ -163,6 +163,8 @@
 <div>
     <p>Unformatted date: {{ toDate }}</p>
     <p>Formatted date with uppercase chaining: {{ toDate | date:'dd MMMM yyyy' | uppercase }}</p>
+    <p>Date in USA: {{ toDate | date:'short':'CDT' }}</p>
+    <p>British date time: {{ toDate | date:'dd/MM/yy HH:mm':'GMT':'en_GB' }}</p>
     <p>Slice pipe: {{ name3 | slice:0:name3.length-2 }}</p>
     <p>Decimal/number pipe: {{ decimalNumber | number:'5.1-4' }}</p>
     <p>Percent pipe: {{ percentNumber | percent:'1.2-2' }}</p>
