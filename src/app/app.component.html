@@ -168,3 +168,11 @@
     <p>Percent pipe: {{ percentNumber | percent:'1.2-2' }}</p>
     <p>Currency pipe: {{ decimalNumber | currency:'PLN':true:'5.1-8' }}</p>
 </div>
+
+<div>
+    
+    <p> Fahrenheit: <input type="text" [value]="fahrenheit" (input)="fahrenheit=$any($event.target).value">
+        = Celsius: {{ fahrenheit | tempConverter:'C' }}</p>
+    <p> Celsius: <input type="text" [value]="celsius" (input)="celsius=$any($event.target).value">
+        = Fahrenheit: {{ celsius | tempConverter:'F' }}</p>
+</div>

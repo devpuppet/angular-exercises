@@ -36,6 +36,8 @@ export class AppComponent {
   toDate = new Date();
   decimalNumber = 123483.32123;
   percentNumber = 0.45;
+  fahrenheit = 0;
+  celsius = 0;
 
   public closeMe() {
     console.log('Close button clicked!');

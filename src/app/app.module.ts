@@ -11,6 +11,7 @@ import { AttributeDirective } from './directives/attribute.directive';
 import { CustomIfDirective } from './directives/structural.directive';
 import { ToggleDirective } from './directives/toggle.directive';
 import { TooltipDirective } from './directives/tooltip.directive';
+import { TempConverterPipe } from './pipes/temp-converter.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { TooltipDirective } from './directives/tooltip.directive';
     AttributeDirective,
     CustomIfDirective,
     ToggleDirective,
-    TooltipDirective
+    TooltipDirective,
+    TempConverterPipe
   ],
   imports: [
     BrowserModule,
