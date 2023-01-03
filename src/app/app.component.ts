@@ -1,4 +1,4 @@
-import { KeyValue } from '@angular/common';
+import { DatePipe, KeyValue } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -51,8 +51,9 @@ export class AppComponent {
   orderByKeyDesc = (a: KeyValue<string, any>, b: KeyValue<string, any>): number => {
     return a.key > b.key ? -1 : 1;
   }
+  today = this.datePipe.transform(new Date(), 'short');
 
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient, public datePipe: DatePipe) {}
 
   public closeMe() {
     console.log('Close button clicked!');

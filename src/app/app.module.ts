@@ -13,6 +13,7 @@ import { ToggleDirective } from './directives/toggle.directive';
 import { TooltipDirective } from './directives/tooltip.directive';
 import { TempConverterPipe } from './pipes/temp-converter.pipe';
 import { HttpClientModule } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
