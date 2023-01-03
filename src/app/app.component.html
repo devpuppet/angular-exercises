@@ -172,9 +172,29 @@
 </div>
 
 <div>
-    
     <p> Fahrenheit: <input type="text" [value]="fahrenheit" (input)="fahrenheit=$any($event.target).value">
         = Celsius: {{ fahrenheit | tempConverter:'C' }}</p>
     <p> Celsius: <input type="text" [value]="celsius" (input)="celsius=$any($event.target).value">
         = Fahrenheit: {{ celsius | tempConverter:'F' }}</p>
+</div>
+
+<div>
+    <p><b>Async pipe</b></p>
+    <div *ngIf="(obsValue | async) as result; else elseAsyncBlock">
+        {{ result }}
+    </div>
+
+    <ng-template #elseAsyncBlock>
+        Please wait!
+    </ng-template>
+
+    <div>
+        <p>Async pipe with ngIf and ngFor: </p>
+        <ul *ngIf="(hounds | async) as breeds; else elseAsyncBlock">
+            <li *ngFor="let breed of breeds.message">
+                {{ breed }}
+                <img src="{{ (randomImage | async )?.message }}" [width]="catWidth" [height]="catHeight">
+            </li>
+        </ul>
+    </div>
 </div>

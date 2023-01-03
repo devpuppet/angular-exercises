@@ -12,6 +12,7 @@ import { CustomIfDirective } from './directives/structural.directive';
 import { ToggleDirective } from './directives/toggle.directive';
 import { TooltipDirective } from './directives/tooltip.directive';
 import { TempConverterPipe } from './pipes/temp-converter.pipe';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { TempConverterPipe } from './pipes/temp-converter.pipe';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

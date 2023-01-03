@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -38,6 +40,10 @@ export class AppComponent {
   percentNumber = 0.45;
   fahrenheit = 0;
   celsius = 0;
+  hounds: Observable<any> = this.getHoundList();
+  randomImage: Observable<any> = this.getRandomBreedImage();
+
+  constructor(public http: HttpClient) {}
 
   public closeMe() {
     console.log('Close button clicked!');
@@ -71,6 +77,19 @@ export class AppComponent {
 
   isOdd(event: HTMLInputElement): boolean {
     return +event.value % 2 === 0;
+  }
+
+  obsValue = new Observable(observer => {
+    console.log('Observable starts');
+    setTimeout(() => { observer.next("This is the response") }, 3000);
+  });
+
+  getHoundList(): Observable<any> {
+    return this.http.get('https://dog.ceo/api/breed/hound/list');
+  }
+
+  getRandomBreedImage(): Observable<any> {
+    return this.http.get('https://dog.ceo/api/breeds/image/random');
   }
 }
 
