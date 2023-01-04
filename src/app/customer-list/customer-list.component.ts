@@ -7,6 +7,7 @@ import { Customer } from '../customer/model/customer';
   styleUrls: ['./customer-list.component.css']
 })
 export class CustomerListComponent implements OnInit {
+  id: string = '';
   name: string = '';
   city: string = '';
 
@@ -27,8 +28,25 @@ export class CustomerListComponent implements OnInit {
 
   public addCustomer() {
     this.customers.push({id: Date.now(), name: this.name, city: this.city});
+    this.resetFields();
+  }
+
+  public updateCustomer() {
+    const customer = this.customers.find(customer => customer.id === +this.id);
+
+    if (!customer) {
+      throw new Error(`Customer with ID = ${this.id} not found`);
+    }
+
+    customer.name = this.name;
+    customer.city = this.city;
+    this.resetFields();
+  }
+
+  private resetFields() {
     this.name = '';
     this.city = '';
+    this.id = '';
   }
 
   // When you add/remove item, Angular will update only the related node, not the entire list - no problem
