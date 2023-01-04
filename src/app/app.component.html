@@ -62,6 +62,10 @@
     </div>
 </div>
 
+<div>
+    Using ChildView: <button (click)="callMethodFromChild()">Increment</button>
+</div>
+
 <div>Angular Change Event: <input type="text" ngModel (ngModelChange)="nameChanged($event)"></div>
 
 <h3>Components</h3>
@@ -213,3 +217,7 @@
     <p><b>Pipe used inside component class</b></p>
     <p>Today: {{ today }}</p>
 </div>
+
+<h3>Component Communication</h3>
+<div>Child component:<app-counter #counter></app-counter></div>
+<p>Parent component local variable: {{ counter.count }}</p>

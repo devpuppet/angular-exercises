@@ -1,7 +1,8 @@
 import { DatePipe, KeyValue } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CounterComponent } from './counter/counter.component';
 
 @Component({
   selector: 'app-root',
@@ -52,6 +53,7 @@ export class AppComponent {
     return a.key > b.key ? -1 : 1;
   }
   today = this.datePipe.transform(new Date(), 'short');
+  @ViewChild(CounterComponent) counterChildComponent!: CounterComponent;
 
   constructor(public http: HttpClient, public datePipe: DatePipe) {}
 
@@ -100,6 +102,10 @@ export class AppComponent {
 
   getRandomBreedImage(): Observable<any> {
     return this.http.get('https://dog.ceo/api/breeds/image/random');
+  }
+
+  callMethodFromChild() {
+    return this.counterChildComponent.increment();
   }
 }
 
