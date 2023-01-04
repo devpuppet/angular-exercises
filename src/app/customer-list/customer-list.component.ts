@@ -43,10 +43,18 @@ export class CustomerListComponent implements OnInit {
     this.resetFields();
   }
 
-  private resetFields() {
+  resetFields() {
     this.name = '';
     this.city = '';
     this.id = '';
+  }
+
+  isUpdate(): boolean {
+    return this.id !== '';
+  }
+
+  isEmpty(): boolean {
+    return this.name === '' || this.city === '';
   }
 
   // When you add/remove item, Angular will update only the related node, not the entire list - no problem
@@ -59,6 +67,12 @@ export class CustomerListComponent implements OnInit {
   // You can also track by multiple fields in order to get unique id
   trackByMultiple(index: number, customer: Customer) {
     return customer.name + customer.city;
+  }
+
+  update(customer: Customer) {
+    this.id = customer.id.toString();
+    this.name = customer.name;
+    this.city = customer.city;
   }
 
 }

@@ -5,6 +5,7 @@
         <div>ID{{ customer.id }}</div>
         <div>{{ customer.name }}</div>
         <div>{{ customer.city }}</div>
+        <button (click)="update()">Update</button>
         <div *ngIf="isLast">Last item</div>
     </div>
 </div>

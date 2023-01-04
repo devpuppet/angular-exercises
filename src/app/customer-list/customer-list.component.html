@@ -1,10 +1,11 @@
 <div>
     <div>
-        <input type="text" [value]="id" (input)="id=$any($event.target).value" placeholder="ID"/>
+        <input type="text" [value]="id" (input)="id=$any($event.target).value" placeholder="ID" disabled/>
         <input type="text" [value]="name" (input)="name=$any($event.target).value" placeholder="Name"/>
         <input type="text" [value]="city" (input)="city=$any($event.target).value" placeholder="City"/>
-        <button (click)="addCustomer()">Add</button>
+        <button [disabled]="isUpdate() || isEmpty()" (click)="addCustomer()">Add</button>
         <button (click)="updateCustomer()">Update</button>
+        <button (click)="resetFields()">Clear</button>
         <button (click)="refresh()">Refresh</button>
     </div>
     <table>
@@ -15,7 +16,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let customer of customers; trackBy:trackByMultiple; let i = index; let o=odd; let e=even; let first=first; let last=last">
-                <app-customer [customer]='customer' [index]="i" [isOdd]="o" [isEven]="e" [isFirst]="first" [isLast]="last"></app-customer>
+                <app-customer [customer]='customer' (customerChange)="update($event)" [index]="i" [isOdd]="o" [isEven]="e" [isFirst]="first" [isLast]="last"></app-customer>
             </tr>
         </tbody>
     </table>

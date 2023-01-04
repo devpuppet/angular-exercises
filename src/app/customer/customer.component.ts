@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Customer } from './model/customer';
 
 @Component({
@@ -20,6 +20,8 @@ export class CustomerComponent implements OnInit, OnChanges {
   index!: number;
   @Input()
   customer!: Customer;
+  @Output()
+  customerChange: EventEmitter<Customer> = new EventEmitter<Customer>();
   private changelog: string[] = [];
 
   constructor() { }
@@ -36,6 +38,10 @@ export class CustomerComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+  }
+
+  update() {
+    this.customerChange.emit(this.customer);
   }
 
 }
