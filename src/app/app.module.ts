@@ -14,6 +14,7 @@ import { TooltipDirective } from './directives/tooltip.directive';
 import { TempConverterPipe } from './pipes/temp-converter.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { InitHookComponent } from './init-hook/init-hook.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { DatePipe } from '@angular/common';
     CustomIfDirective,
     ToggleDirective,
     TooltipDirective,
-    TempConverterPipe
+    TempConverterPipe,
+    InitHookComponent
   ],
   imports: [
     BrowserModule,

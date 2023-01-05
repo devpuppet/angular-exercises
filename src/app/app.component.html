@@ -221,3 +221,13 @@
 <h3>Component Communication</h3>
 <div>Child component:<app-counter #counter></app-counter></div>
 <p>Parent component local variable: {{ counter.count }}</p>
+
+<h3>Lifecycle hooks</h3>
+
+<div>
+    <b>ngOnChanges</b> - Look at counter.component.ts
+    <b>ngOnInit</b><app-init-hook></app-init-hook>
+    <b>ngOnDestroy</b>
+    <button (click)="toggleChildDisplay()">Hide/Show Child</button>
+    <app-init-hook *ngIf="hideShow"></app-init-hook>
+</div>

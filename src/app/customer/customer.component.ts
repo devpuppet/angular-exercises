@@ -22,6 +22,9 @@ export class CustomerComponent implements OnInit, OnChanges {
   customer!: Customer;
   @Output()
   customerChange: EventEmitter<Customer> = new EventEmitter<Customer>();
+  oldCustomer: Customer = {id: 0, name: '', city: ''};
+  doCheckCount = 0;
+
   private changelog: string[] = [];
 
   constructor() { }
@@ -38,6 +41,27 @@ export class CustomerComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    this.oldCustomer = Object.assign({}, this.customer);
+  }
+
+  // this is not working as expected - you need to change trackBy function to trackBy instead of trackByMultiple
+  // because Angular recreates the component and ngOnInit is launched
+  ngDoCheck(): void {
+    console.log('app-init-hook component - ngDoCheck');
+    this.doCheckCount++;
+    if (this.oldCustomer.id !== this.customer.id
+      || this.oldCustomer.name !== this.customer.name
+      || this.oldCustomer.city !== this.customer.city) {
+        console.log('Customer changed!');
+        const to  = JSON.stringify(this.customer);
+        const from = JSON.stringify(this.oldCustomer);
+        const changeLog = `DoCheck customer: changed from ${from} to ${to} `;
+        this.changelog.push(changeLog);
+
+        this.oldCustomer = Object.assign({}, this.customer);
+    } else {
+      console.log('Customer not changed!');
+    }
   }
 
   update() {

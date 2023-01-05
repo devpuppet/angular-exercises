@@ -54,6 +54,7 @@ export class AppComponent {
   }
   today = this.datePipe.transform(new Date(), 'short');
   @ViewChild(CounterComponent) counterChildComponent!: CounterComponent;
+  hideShow = true;
 
   constructor(public http: HttpClient, public datePipe: DatePipe) {}
 
@@ -106,6 +107,10 @@ export class AppComponent {
 
   callMethodFromChild() {
     return this.counterChildComponent.increment();
+  }
+
+  toggleChildDisplay() {
+    this.hideShow = !this.hideShow;
   }
 }
 
