@@ -15,6 +15,7 @@ import { TempConverterPipe } from './pipes/temp-converter.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { InitHookComponent } from './init-hook/init-hook.component';
+import { CardComponent } from './card/card.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { InitHookComponent } from './init-hook/init-hook.component';
     ToggleDirective,
     TooltipDirective,
     TempConverterPipe,
-    InitHookComponent
+    InitHookComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
