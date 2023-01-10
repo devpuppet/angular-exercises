@@ -1,6 +1,7 @@
 import { DatePipe, KeyValue } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { AfterViewInit, Component, Input, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, QueryList, TemplateRef, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
+import { NgModel } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { CounterComponent } from './counter/counter.component';
 import { Customer } from './customer/model/customer';
@@ -62,11 +63,26 @@ export class AppComponent implements AfterViewInit {
     city: 'Bar'
   };
   @ViewChild("parentTemp") templateFromChild!: TemplateRef<HTMLElement>;
+  @ViewChild('heyButton') heyButton!: ElementRef;
+  @ViewChild('heyInput', { static: false, read: NgModel}) inRef!: NgModel;
+  @ViewChild('heyInput', { static: false, read: ElementRef}) elRef!: ElementRef;
+  @ViewChild('heyInput', { static: false, read: ViewContainerRef}) vRef!: ViewContainerRef;
+  @ViewChildren(CounterComponent) counters!: QueryList<CounterComponent>;
+  showCounter = true;
 
   constructor(public http: HttpClient, public datePipe: DatePipe) {}
 
   ngAfterViewInit(): void {
     console.log('template from child', this.templateFromChild);
+
+    this.heyButton.nativeElement.innerHTML = 'InnerHTML from @ViewChild';
+    console.log('inRef: ', this.inRef);
+    console.log('elRef: ', this.elRef);
+    console.log('vRef: ', this.vRef);
+
+    this.counters.changes.subscribe(data => {
+      console.log("ViewChildren changes subscribe: ", data);
+    })
   }
 
   public closeMe() {
@@ -126,6 +142,15 @@ export class AppComponent implements AfterViewInit {
 
   sayHello(firstName: HTMLInputElement, lastName: HTMLInputElement) {
     alert(`Hello ${firstName.value} ${lastName.value}!`);
+  }
+
+  show() {
+    this.counters.forEach(counter => console.log('counter: ', counter));
+  }
+
+  showHideCounter() {
+    this.showCounter = !this.showCounter;
+    return this.showCounter;
   }
 }
 

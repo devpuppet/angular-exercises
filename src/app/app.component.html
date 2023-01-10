@@ -63,7 +63,7 @@
 </div>
 
 <div>
-    Using ChildView: <button (click)="callMethodFromChild()">Increment</button>
+    Using ViewChild: <button (click)="callMethodFromChild()">Increment</button>
 </div>
 
 <div>Angular Change Event: <input type="text" ngModel (ngModelChange)="nameChanged($event)"></div>
@@ -281,4 +281,20 @@
 <h3>HostBinding and HostListener</h3>
 <div>
     <button style="width: 100px; height: 40px" appHighlight>Button</button>
+</div>
+
+<h3>ViewChild</h3>
+
+<div>
+    <button #heyButton>Hey!</button>
+    <input #heyInput [ngModel]="name3"/>
+</div>
+
+<h3>View Children</h3>
+<button (click)="showHideCounter()">Show/Hide counter</button>
+<ng-container *ngIf="showCounter">
+    <app-counter></app-counter>
+</ng-container>
+<div>
+    <button (click)="show()">Log in console</button>
 </div>
