@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { InitHookComponent } from './init-hook/init-hook.component';
 import { CardComponent } from './card/card.component';
+import { ChildTemplateComponent } from './child-template/child-template.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { CardComponent } from './card/card.component';
     TooltipDirective,
     TempConverterPipe,
     InitHookComponent,
-    CardComponent
+    CardComponent,
+    ChildTemplateComponent
   ],
   imports: [
     BrowserModule,

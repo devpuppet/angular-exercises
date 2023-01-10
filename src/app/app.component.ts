@@ -1,15 +1,16 @@
 import { DatePipe, KeyValue } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, TemplateRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CounterComponent } from './counter/counter.component';
+import { Customer } from './customer/model/customer';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   protected readonly firstName = 'Kamil';
   protected readonly lastName = 'Kukiełka';
   title = () => `${this.firstName} ${this.lastName}`;
@@ -55,8 +56,18 @@ export class AppComponent {
   today = this.datePipe.transform(new Date(), 'short');
   @ViewChild(CounterComponent) counterChildComponent!: CounterComponent;
   hideShow = true;
+  customer: Customer = {
+    id: 1,
+    name: 'Foo',
+    city: 'Bar'
+  };
+  @ViewChild("parentTemp") templateFromChild!: TemplateRef<HTMLElement>;
 
   constructor(public http: HttpClient, public datePipe: DatePipe) {}
+
+  ngAfterViewInit(): void {
+    console.log('template from child', this.templateFromChild);
+  }
 
   public closeMe() {
     console.log('Close button clicked!');

@@ -93,13 +93,13 @@
         <input style="width:min-content;" type="text" [value]="number" (input)="number=$any($event.target).value" placeholder="Enter number '1' or '2'">
     <ng-container [ngSwitch]="number">
         <ng-container *ngSwitchCase="1">
-            <ng-container *ngTemplateOutlet="template1"></ng-container>
+            <ng-container *ngTemplateOutlet="template1; context: { message: 'Value passed to template!' }"></ng-container>
         </ng-container>
         <ng-container *ngSwitchCase="2">
-            <ng-container *ngTemplateOutlet="template2"></ng-container>
+            <ng-container *ngTemplateOutlet="template2; context: { customer: customer }"></ng-container>
         </ng-container>
-        <ng-template #template1>The number is 1</ng-template>
-        <ng-template #template2>The number is 2</ng-template>
+        <ng-template #template1 let-message="message">{{ message }}</ng-template>
+        <ng-template #template2 let-customer="customer">Customer {{ customer.name }} is living in {{ customer.city }}</ng-template>
         <ng-container *ngSwitchDefault>Please provide a number 1 or 2</ng-container>
     </ng-container>
     </div>
@@ -268,4 +268,12 @@
         <input type="text" #lastName>
     </div>
     <button (click)="sayHello(firstName, lastName)">Say hello!</button>
+</div>
+
+<h3>Templates</h3>
+<div>
+    <ng-template #parentTemp>
+        <p>This is a template from parent!</p>
+    </ng-template>
+    <app-child-template [customTemplate]="parentTemp"></app-child-template>
 </div>
