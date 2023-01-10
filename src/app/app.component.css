@@ -29,3 +29,12 @@ img {
     background-color: lightgray;
     padding: 5px;
 }
+
+.highlight {
+    color: green;
+    display: block;
+}
+
+.box {
+    border: 2px dashed green;
+}

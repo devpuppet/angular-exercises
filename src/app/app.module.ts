@@ -17,6 +17,7 @@ import { DatePipe } from '@angular/common';
 import { InitHookComponent } from './init-hook/init-hook.component';
 import { CardComponent } from './card/card.component';
 import { ChildTemplateComponent } from './child-template/child-template.component';
+import { HighlightDirective } from './directives/highlight.directive';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ChildTemplateComponent } from './child-template/child-template.componen
     TempConverterPipe,
     InitHookComponent,
     CardComponent,
-    ChildTemplateComponent
+    ChildTemplateComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
