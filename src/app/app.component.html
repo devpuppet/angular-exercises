@@ -233,21 +233,36 @@
 </div>
 
 <h3>Content projection</h3>
-
-<app-card>
-    <ng-container ngProjectAs=".header">
-        <div>
-            <h1 style="color:blue;">Angular</h1>
+<div>
+    <app-card>
+        <ng-container ngProjectAs=".header">
+            <div>
+                <h1 style="color:blue;">Angular</h1>
+            </div>
+          </ng-container>
+          <div class="content">One framework. Mobile & desktop.</div>
+          <div class="footer"><b>Super-powered by Google </b></div>
+    </app-card>
+    
+    <app-card>
+        <div class="header">
+          <h1 style="color:red;">React</h1>
         </div>
-      </ng-container>
-      <div class="content">One framework. Mobile & desktop.</div>
-      <div class="footer"><b>Super-powered by Google </b></div>
-</app-card>
+        <div class="content">A JavaScript library for building user interfaces</div>
+        <div class="footer"><b>Facebook Open Source </b></div>
+    </app-card>
+</div>
 
-<app-card>
-    <div class="header">
-      <h1 style="color:red;">React</h1>
+<h3>Template Variable Reference</h3>
+
+<div>
+    <div>
+        <label>First Name</label>
+        <input type="text" #firstName>
     </div>
-    <div class="content">A JavaScript library for building user interfaces</div>
-    <div class="footer"><b>Facebook Open Source </b></div>
-  </app-card>
+    <div>
+        <label>Last Name</label>
+        <input type="text" #lastName>
+    </div>
+    <button (click)="sayHello(firstName, lastName)">Say hello!</button>
+</div>

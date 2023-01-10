@@ -112,6 +112,10 @@ export class AppComponent {
   toggleChildDisplay() {
     this.hideShow = !this.hideShow;
   }
+
+  sayHello(firstName: HTMLInputElement, lastName: HTMLInputElement) {
+    alert(`Hello ${firstName.value} ${lastName.value}!`);
+  }
 }
 
 class Item {
