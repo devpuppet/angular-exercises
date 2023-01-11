@@ -18,6 +18,8 @@ import { InitHookComponent } from './init-hook/init-hook.component';
 import { CardComponent } from './card/card.component';
 import { ChildTemplateComponent } from './child-template/child-template.component';
 import { HighlightDirective } from './directives/highlight.directive';
+import { CardListComponent } from './card-list/card-list.component';
+import { Card2Component } from './card2/card2.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { HighlightDirective } from './directives/highlight.directive';
     InitHookComponent,
     CardComponent,
     ChildTemplateComponent,
-    HighlightDirective
+    HighlightDirective,
+    CardListComponent,
+    Card2Component
   ],
   imports: [
     BrowserModule,
