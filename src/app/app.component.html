@@ -298,3 +298,25 @@
 <div>
     <button (click)="show()">Log in console</button>
 </div>
+
+<h3>Renderer2</h3>
+<div #rendererDiv>
+    <label #example></label>
+    <div>
+        <button (click)="removeBackgroundColor()">Remove label color</button>
+        <button (click)="addBackgroundColor()">Add label color</button>
+        <button (click)="removeBoxClass()">Remove boxing</button>
+        <button (click)="addBoxClass()">Add boxing</button>
+        <button (click)="addStyleAttribute()">Add style</button>
+        <button (click)="removeStyleAttribute()">Remove style</button>
+        <button (click)="addText()">Add text</button>
+        <button (click)="appendNewDiv()">Append new div</button>
+        <button (click)="insertNewDivBeforeLabel()">Insert div before label</button>
+        <button (click)="createComment()">Create comment</button>
+        <button (click)="addDivBoxing()">Add div boxing</button>
+        <button (click)="addButtonsBoxing()">Add buttons boxing</button>
+        <button (click)="removeAll()">Remove all</button>
+        <button (click)="appendByRootElement()">Append by root</button>
+        <button #clickListen>Append by listener</button>
+    </div>
+</div>

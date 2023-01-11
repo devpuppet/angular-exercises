@@ -1,6 +1,6 @@
 import { DatePipe, KeyValue } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { AfterViewInit, Component, ElementRef, Input, QueryList, TemplateRef, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, QueryList, Renderer2, TemplateRef, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { CounterComponent } from './counter/counter.component';
@@ -11,7 +11,7 @@ import { Customer } from './customer/model/customer';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements AfterViewInit, OnDestroy {
   protected readonly firstName = 'Kamil';
   protected readonly lastName = 'Kukiełka';
   title = () => `${this.firstName} ${this.lastName}`;
@@ -70,7 +70,12 @@ export class AppComponent implements AfterViewInit {
   @ViewChildren(CounterComponent) counters!: QueryList<CounterComponent>;
   showCounter = true;
 
-  constructor(public http: HttpClient, public datePipe: DatePipe) {}
+  @ViewChild('example', { static: false }) exampleLabel!: ElementRef;
+  @ViewChild('rendererDiv', { static: false }) rendererDiv!: ElementRef;
+  @ViewChild('clickListen', { static: false }) listenButton!: ElementRef;
+  clickListener: any;
+
+  constructor(public http: HttpClient, public datePipe: DatePipe, private renderer: Renderer2) {}
 
   ngAfterViewInit(): void {
     console.log('template from child', this.templateFromChild);
@@ -82,7 +87,18 @@ export class AppComponent implements AfterViewInit {
 
     this.counters.changes.subscribe(data => {
       console.log("ViewChildren changes subscribe: ", data);
-    })
+    });
+
+    // Renderer2
+    this.renderer.setProperty(this.exampleLabel.nativeElement, 'innerHTML', 'Renderer2 example');
+    this.renderer.setStyle(this.exampleLabel.nativeElement, 'color', 'red');
+    this.clickListener = this.renderer.listen(this.listenButton.nativeElement, 'click', event => {
+      this.appendNewDiv();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.clickListener.unsubscribe();
   }
 
   public closeMe() {
@@ -151,6 +167,79 @@ export class AppComponent implements AfterViewInit {
   showHideCounter() {
     this.showCounter = !this.showCounter;
     return this.showCounter;
+  }
+
+  removeBackgroundColor() {
+    this.renderer.removeStyle(this.exampleLabel.nativeElement, 'background-color');
+  }
+
+  addBackgroundColor() {
+    this.renderer.setStyle(this.exampleLabel.nativeElement, 'background-color', 'blue');
+  }
+
+  removeBoxClass() {
+    this.renderer.removeClass(this.exampleLabel.nativeElement, 'box');
+  }
+
+  addBoxClass() {
+    this.renderer.addClass(this.exampleLabel.nativeElement, 'box');
+  }
+
+  addStyleAttribute() {
+    this.renderer.setAttribute(this.exampleLabel.nativeElement, 'style', 'font-size: 30px');
+  }
+
+  removeStyleAttribute() {
+    this.renderer.removeAttribute(this.exampleLabel.nativeElement, 'style');
+  }
+
+  addText() {
+    const text = this.renderer.createText('Text added by Renderer2');
+
+    this.renderer.appendChild(this.exampleLabel.nativeElement, text);
+  }
+
+  appendNewDiv() {
+    const div = this.renderer.createElement('div');
+    const text = this.renderer.createText('Inserted after label');
+    this.renderer.appendChild(div, text);
+    this.renderer.appendChild(this.exampleLabel.nativeElement, div);
+  }
+
+  insertNewDivBeforeLabel() {
+    const div = this.renderer.createElement('div');
+    const text = this.renderer.createText('Inserted before label');
+    this.renderer.appendChild(div, text);
+    this.renderer.insertBefore(this.rendererDiv.nativeElement, div, this.exampleLabel.nativeElement);
+  }
+
+  createComment() {
+    const comment = this.renderer.createComment('Comment from Renderer2');
+    this.renderer.appendChild(this.exampleLabel.nativeElement, comment);
+  }
+
+  addDivBoxing() {
+    const parent = this.renderer.parentNode(this.exampleLabel.nativeElement);
+    this.renderer.addClass(parent, 'box');
+  }
+
+  addButtonsBoxing() {
+    const sibling = this.renderer.nextSibling(this.exampleLabel.nativeElement);
+    this.renderer.addClass(sibling, 'box');
+  }
+
+  removeAll() {
+    this.renderer.selectRootElement(this.exampleLabel.nativeElement, false);
+  }
+
+  appendByRootElement() {
+    const root = this.renderer.selectRootElement(this.exampleLabel.nativeElement, true);
+    const text = this.renderer.createText('Added by root element');
+    this.renderer.appendChild(root, text);
+  }
+
+  appendByListener() {
+
   }
 }
 
