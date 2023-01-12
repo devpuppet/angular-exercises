@@ -1,1 +1,6 @@
-<p>init-hook works!</p>
+<p>Hooks component</p>
+<div>
+    Message <input type="text" [value]="message" (input)="$any($event.target).value">
+    <p>Injected Content:</p>
+    <ng-content></ng-content>
+</div>

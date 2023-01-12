@@ -8,6 +8,7 @@ import { Customer } from '../customer/model/customer';
 })
 export class InitHookComponent implements OnInit, OnDestroy {
   @Input() customer!: Customer;
+  message = '';
 
   constructor() { 
     console.log("app-init-hook component - constructor comes before ngOnInit");
@@ -19,6 +20,30 @@ export class InitHookComponent implements OnInit, OnDestroy {
     
   ngOnDestroy(): void {
     console.log("app-init-hook component - ngOnDestroy")
+  }
+
+  ngOnChanges() {
+    console.log('app-init-hook component - ngOnChanges');
+  }
+ 
+  ngDoCheck() {
+    console.log('app-init-hook component - ngDoCheck');
+  }
+ 
+  ngAfterContentInit() {
+    console.log('app-init-hook component - ngAfterContentInit');
+  }
+ 
+  ngAfterContentChecked() {
+    console.log('app-init-hook component - ngAfterContentChecked');
+  }
+ 
+  ngAfterViewInit() {
+    console.log('app-init-hook component - AfterViewInit');
+  }
+ 
+   ngAfterViewChecked() {
+    console.log('app-init-hook component - AfterViewChecked');
   }
 
 }

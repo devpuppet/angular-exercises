@@ -5,6 +5,7 @@ import { NgModel } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { CounterComponent } from './counter/counter.component';
 import { Customer } from './customer/model/customer';
+import { InitHookComponent } from './init-hook/init-hook.component';
 
 @Component({
   selector: 'app-root',
@@ -75,6 +76,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   @ViewChild('clickListen', { static: false }) listenButton!: ElementRef;
   clickListener: any;
 
+  @ViewChild(InitHookComponent) hookComponent!: InitHookComponent;
+
   constructor(public http: HttpClient, public datePipe: DatePipe, private renderer: Renderer2) {}
 
   ngAfterViewInit(): void {
@@ -95,6 +98,9 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     this.clickListener = this.renderer.listen(this.listenButton.nativeElement, 'click', event => {
       this.appendNewDiv();
     });
+
+    // Hooks
+    console.log('AppComponent==>AfterViewInit');
   }
 
   ngOnDestroy(): void {
@@ -238,7 +244,28 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     this.renderer.appendChild(root, text);
   }
 
-  appendByListener() {
+  ngOnChanges() {
+    console.log('AppComponent==>ngOnChanges');
+  }
+ 
+  ngOnInit() {
+    console.log('AppComponent==>ngOnInit');
+  }
+ 
+  ngDoCheck() {
+    console.log('AppComponent==>ngDoCheck');
+  }
+ 
+  ngAfterContentInit() {
+    console.log('AppComponent==>ngAfterContentInit');
+  }
+ 
+  ngAfterContentChecked() {
+    console.log('AppComponent==>ngAfterContentChecked');
+  }
+ 
+  ngAfterViewChecked() {
+    console.log('AppComponent==>AfterViewChecked');
 
   }
 }
