@@ -5,8 +5,12 @@ import { NgModel } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { CounterComponent } from './counter/counter.component';
 import { Customer } from './customer/model/customer';
+import { CustomDecorator } from './decorators/decorator';
 import { InitHookComponent } from './init-hook/init-hook.component';
 
+@CustomDecorator({
+  value: 'value from decorator'
+})
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
