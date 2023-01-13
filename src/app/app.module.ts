@@ -21,6 +21,8 @@ import { HighlightDirective } from './directives/highlight.directive';
 import { CardListComponent } from './card-list/card-list.component';
 import { Card2Component } from './card2/card2.component';
 import { ShadowDomComponentComponent } from './shadow-dom-component/shadow-dom-component.component';
+import { Subpage1Component } from './subpage1/subpage1.component';
+import { Subpage2Component } from './subpage2/subpage2.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { ShadowDomComponentComponent } from './shadow-dom-component/shadow-dom-c
     HighlightDirective,
     CardListComponent,
     Card2Component,
-    ShadowDomComponentComponent
+    ShadowDomComponentComponent,
+    Subpage1Component,
+    Subpage2Component
   ],
   imports: [
     BrowserModule,

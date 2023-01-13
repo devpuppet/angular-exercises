@@ -346,3 +346,13 @@
         using booleans: <label [class.blueText]="true" [class.bigText]="false">Another styled text</label>
     </div>
 </div>
+
+<h3>Routing</h3>
+<div>
+    <ul>
+        <li><a [routerLink]="['/subpage1']" routerLinkActive="router-link-active">Subpage1</a></li>
+        <li><a [routerLink]="['/subpage2']" routerLinkActive="router-link-active">Subpage2</a></li>
+    </ul>
+
+    <router-outlet></router-outlet>
+</div>
