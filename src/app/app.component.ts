@@ -82,6 +82,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild(InitHookComponent) hookComponent!: InitHookComponent;
 
+  colorBlue = true;
+
   constructor(public http: HttpClient, public datePipe: DatePipe, private renderer: Renderer2) {}
 
   ngAfterViewInit(): void {
@@ -246,6 +248,10 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     const root = this.renderer.selectRootElement(this.exampleLabel.nativeElement, true);
     const text = this.renderer.createText('Added by root element');
     this.renderer.appendChild(root, text);
+  }
+
+  toggleStyle() {
+    this.colorBlue = !this.colorBlue;
   }
 
   ngOnChanges() {

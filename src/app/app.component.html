@@ -332,3 +332,17 @@
     <p>The parent and sibling styles still affect the component. but that is angular’s implementation of shadow dom</p>
     <app-shadow-dom-component></app-shadow-dom-component>
 </div>
+
+<h3>Styles</h3>
+<div>
+    <div>
+        <button (click)="toggleStyle()">Toggle</button>
+    <label [style.color]="colorBlue ? 'blue' : 'black'">This text is conditionally styled</label>
+    </div>
+    <div>
+        using ClassName: <label [className]="'blueText bigText'">Styled text</label>
+    </div>
+    <div>
+        using booleans: <label [class.blueText]="true" [class.bigText]="false">Another styled text</label>
+    </div>
+</div>
