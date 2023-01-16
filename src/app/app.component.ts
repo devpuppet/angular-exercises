@@ -1,8 +1,8 @@
-import { DatePipe, KeyValue } from '@angular/common';
+import { DatePipe, KeyValue, KeyValuePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, QueryList, Renderer2, TemplateRef, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { NgModel } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { filter, from, fromEvent, map, Observable, of, pipe, tap } from 'rxjs';
 import { CounterComponent } from './counter/counter.component';
 import { Customer } from './customer/model/customer';
 import { CustomDecorator } from './decorators/decorator';
@@ -84,7 +84,9 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   colorBlue = true;
 
-  constructor(public http: HttpClient, public datePipe: DatePipe, private renderer: Renderer2) {}
+  @ViewChild('btn', { static: false }) btn!: ElementRef;
+
+  constructor(public http: HttpClient, public datePipe: DatePipe, private renderer: Renderer2, private keyValuePipe: KeyValuePipe) {}
 
   ngAfterViewInit(): void {
     console.log('template from child', this.templateFromChild);
@@ -107,6 +109,9 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
     // Hooks
     console.log('AppComponent==>AfterViewInit');
+
+    // RXJS
+    this.buttonClick();
   }
 
   ngOnDestroy(): void {
@@ -260,6 +265,34 @@ export class AppComponent implements AfterViewInit, OnDestroy {
  
   ngOnInit() {
     console.log('AppComponent==>ngOnInit');
+
+    // RXJS
+    const observer = {
+      next(value: any) {
+        console.log(value);
+      },
+      error() {
+        console.log('error');
+      },
+      complete() {
+        console.log('completed');
+      }
+    };
+    this.obs.subscribe(observer);
+    this.obsUsingOf.subscribe(observer);
+    this.obsUsingFrom.subscribe(observer);
+
+    this.obsWithError.pipe(
+      tap({
+        next(value) {
+          console.log(value);
+        },
+        error(err) {
+          console.log('Tap error: ', err);
+        }
+      }
+    ))
+    .subscribe();
   }
  
   ngDoCheck() {
@@ -276,7 +309,62 @@ export class AppComponent implements AfterViewInit, OnDestroy {
  
   ngAfterViewChecked() {
     console.log('AppComponent==>AfterViewChecked');
+  }
 
+  // Observables
+  private customOperator = pipe(
+    tap(data => console.log('tap: ', data)),
+    filter((data: any) => data > 2),
+    tap(data => console.log('tap: ', data)),
+    map((val, index) => {
+      console.log('index: ', index);
+      return val * 2;
+    }),
+  );
+
+  private obs = new Observable<number>((observer) => {
+    console.log('Observable starts');
+    setTimeout(() => observer.next(1), 1000);
+    setTimeout(() => observer.next(2), 2000);
+    setTimeout(() => observer.next(3), 3000);
+    setTimeout(() => observer.next(4), 4000);
+    setTimeout(() => observer.next(5), 5000);
+    setTimeout(() => observer.complete(), 5500);
+  }).pipe(
+    this.customOperator
+  );
+
+  private obsWithError = new Observable<string>(observer => {
+    observer.next('A');
+    observer.next('B');
+    observer.next('C');
+    observer.error('Error occured!');
+    observer.next('D');
+    observer.next('E');
+  });
+
+  private obsUsingOf = of(1,['hi!', 9, { name: 'Kamil' }], "foo!");
+  private obsUsingFrom = from([1, 'a', 2, 'b'])
+  private buttonSubscription: any
+  private $dogsBreed(): Observable<any> {
+    return this.http.get<any>('https://dog.ceo/api/breeds/list/all');
+  }
+
+  buttonClick() {
+    this.buttonSubscription = fromEvent(this.btn.nativeElement, 'click')
+    .subscribe(res => console.log('fromEvent: ', res));
+  }
+
+  getDogsBreed() {
+    this.$dogsBreed()
+    .pipe(
+      tap(data => console.log(data)),
+      map(data => {
+        const dogs = this.keyValuePipe.transform(data.message);
+        console.log('Breeds: ', dogs)
+      })
+    )
+    .subscribe();
   }
 }
 

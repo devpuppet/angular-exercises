@@ -13,7 +13,7 @@ import { ToggleDirective } from './directives/toggle.directive';
 import { TooltipDirective } from './directives/tooltip.directive';
 import { TempConverterPipe } from './pipes/temp-converter.pipe';
 import { HttpClientModule } from '@angular/common/http';
-import { DatePipe } from '@angular/common';
+import { DatePipe, KeyValuePipe } from '@angular/common';
 import { InitHookComponent } from './init-hook/init-hook.component';
 import { CardComponent } from './card/card.component';
 import { ChildTemplateComponent } from './child-template/child-template.component';
@@ -51,7 +51,7 @@ import { Subpage2Component } from './subpage2/subpage2.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, KeyValuePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
