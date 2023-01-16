@@ -363,4 +363,10 @@
     <button (click)="getDogsBreed()">Log dog breeds</button>
     <button (click)="startObservable()">Start observable</button>
     <button (click)="stopObservable()">Stop observable</button>
+    <div>
+        <p><b>debounceTime:</b></p>
+        <form [formGroup]="form">Name: <input formControlName="name"></form>
+        <p><b>debounce:</b></p>
+        <form [formGroup]="form2">Name: <input formControlName="name"></form>
+    </div>
 </div>
