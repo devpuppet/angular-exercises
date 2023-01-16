@@ -2,7 +2,7 @@ import { DatePipe, KeyValue, KeyValuePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, QueryList, Renderer2, TemplateRef, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { NgModel } from '@angular/forms';
-import { filter, from, fromEvent, map, Observable, of, pipe, tap } from 'rxjs';
+import { filter, from, fromEvent, map, Observable, of, pipe, switchMap, tap } from 'rxjs';
 import { CounterComponent } from './counter/counter.component';
 import { Customer } from './customer/model/customer';
 import { CustomDecorator } from './decorators/decorator';
@@ -293,6 +293,15 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       }
     ))
     .subscribe();
+
+    this.sourceObs.pipe(
+      switchMap(value => {
+        console.log('Source value', value);
+        console.log('Starting new observable');
+        return this.innerObs;
+      })
+    )
+    .subscribe(console.log);
   }
  
   ngDoCheck() {
@@ -346,6 +355,9 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   private obsUsingOf = of(1,['hi!', 9, { name: 'Kamil' }], "foo!");
   private obsUsingFrom = from([1, 'a', 2, 'b'])
   private buttonSubscription: any
+  private sourceObs = of(1, 2, 3, 4);
+  private innerObs = of('A', 'B', 'C', 'D');
+
   private $dogsBreed(): Observable<any> {
     return this.http.get<any>('https://dog.ceo/api/breeds/list/all');
   }
