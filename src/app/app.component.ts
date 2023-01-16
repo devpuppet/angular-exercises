@@ -2,7 +2,7 @@ import { DatePipe, KeyValue, KeyValuePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, QueryList, Renderer2, TemplateRef, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { FormControl, FormGroup, NgModel } from '@angular/forms';
-import { concatMap, debounce, debounceTime, exhaustMap, filter, first, forkJoin, from, fromEvent, interval, last, map, mergeMap, Observable, of, pipe, range, reduce, scan, single, skip, skipLast, skipUntil, skipWhile, Subject, Subscription, switchMap, take, takeLast, takeUntil, takeWhile, tap, timer } from 'rxjs';
+import { concatMap, debounce, debounceTime, delay, delayWhen, exhaustMap, filter, first, forkJoin, from, fromEvent, interval, last, map, mergeMap, Observable, of, pipe, range, reduce, scan, single, skip, skipLast, skipUntil, skipWhile, Subject, Subscription, switchMap, take, takeLast, takeUntil, takeWhile, tap, timer } from 'rxjs';
 import { CounterComponent } from './counter/counter.component';
 import { Customer } from './customer/model/customer';
 import { CustomDecorator } from './decorators/decorator';
@@ -421,6 +421,29 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     // emits last received value after delay set by interval (or any other observable)
     .pipe(debounce(() => interval(500)))
     .subscribe(data => console.log('debounce: ', data));
+
+    of(1,2,3,4,5)
+    .pipe(
+      tap(val => console.log('before delay 5000ms')),
+      delay(5000)
+    )
+    .subscribe(val => console.log('after delay 5000ms', val));
+
+    const now = new Date();
+    const date = now.setSeconds(now.getSeconds() + 5);
+    of(1,2,3,4,5)
+    .pipe(
+      tap(val => console.log('before delay by date')),
+      delay(date)
+    )
+    .subscribe(val => console.log('after delay by date', val));
+
+    of(1,2,3,4,5)
+    .pipe(
+      tap(val => console.log('before delayWhen')),
+      delayWhen(() => timer(5000))
+    )
+    .subscribe(val => console.log('after delayWhen', val));
   }
  
   ngDoCheck() {
