@@ -2,7 +2,7 @@ import { DatePipe, KeyValue, KeyValuePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, QueryList, Renderer2, TemplateRef, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { NgModel } from '@angular/forms';
-import { concatMap, exhaustMap, filter, forkJoin, from, fromEvent, interval, map, mergeMap, Observable, of, pipe, range, Subject, switchMap, take, takeLast, takeUntil, takeWhile, tap } from 'rxjs';
+import { concatMap, exhaustMap, filter, first, forkJoin, from, fromEvent, interval, last, map, mergeMap, Observable, of, pipe, range, single, Subject, switchMap, take, takeLast, takeUntil, takeWhile, tap } from 'rxjs';
 import { CounterComponent } from './counter/counter.component';
 import { Customer } from './customer/model/customer';
 import { CustomDecorator } from './decorators/decorator';
@@ -368,6 +368,32 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       takeLast(3)
     )
     .subscribe(val => console.log('takeLast: ', val));
+
+    of(1,2,3).pipe(first(val => val > 2)).subscribe(val => console.log('first > 2: ', val));
+    of(1,2,3).pipe(first(val => val > 10)).subscribe({
+      next(value: any) {
+        console.log('first > 10: ', value);
+      },
+      error(err: any) {
+        console.log('first > 10 error: ', err);
+      }
+    });
+    of(1,2,3).pipe(first(val => val > 10, 50)).subscribe(val => console.log('first > 10, default 50: ', val));
+
+    of(1,2,3,1,4,10).pipe(last(val => val > 2)).subscribe(val => console.log('last > 2: ', val));
+    of(1,2,3).pipe(last(val => val > 10)).subscribe({
+      next(value: any) {
+        console.log('last > 10: ', value);
+      },
+      error(err: any) {
+        console.log('last > 10 error: ', err);
+      }
+    });
+    of(1,2,3).pipe(last(val => val > 10, 50)).subscribe(val => console.log('last > 10, default 50: ', val));
+
+    of(1,2,3).pipe(single(val => val === 3)).subscribe(val => console.log('single === 3: ', val));
+    of(1,2,3).pipe(single(val => val === 4)).subscribe({ next(val) { console.log('single === 4 ', val)}, error(err) { console.log('single === 4 error: ', err.message)} });
+    of(1,2,3,1).pipe(single(val => val === 1)).subscribe({ next(val) { console.log('single === 1 ', val)}, error(err) { console.log('single === 1 error: ', err.message)} });
   }
  
   ngDoCheck() {
