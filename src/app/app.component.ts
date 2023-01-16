@@ -2,7 +2,7 @@ import { DatePipe, KeyValue, KeyValuePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, QueryList, Renderer2, TemplateRef, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { NgModel } from '@angular/forms';
-import { filter, forkJoin, from, fromEvent, map, mergeMap, Observable, of, pipe, switchMap, tap } from 'rxjs';
+import { concatMap, filter, forkJoin, from, fromEvent, map, mergeMap, Observable, of, pipe, switchMap, tap } from 'rxjs';
 import { CounterComponent } from './counter/counter.component';
 import { Customer } from './customer/model/customer';
 import { CustomDecorator } from './decorators/decorator';
@@ -305,6 +305,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
     of("hound", "mastiff", "retriever")
     .pipe(
+      // mergeMap doesn't keep the order
       mergeMap(breed => {
         const breedDetailUrl = 'https://dog.ceo/api/breed/' + breed + '/list';
         const imageUrl = 'https://dog.ceo/api/breed/' + breed + '/images/random';
@@ -316,6 +317,21 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       })
     )
     .subscribe(data => console.log('dogs mergeMap: ', data.map(val => val.message)));
+
+    of("hound", "mastiff", "retriever")
+    .pipe(
+      // concatMap keeps the order
+      concatMap(breed => {
+        const breedDetailUrl = 'https://dog.ceo/api/breed/' + breed + '/list';
+        const imageUrl = 'https://dog.ceo/api/breed/' + breed + '/images/random';
+
+        const breedDetailObs = this.http.get<any>(breedDetailUrl);
+        const imageObs = this.http.get<any>(imageUrl);
+
+        return forkJoin([breedDetailObs, imageObs]);
+      })
+    )
+    .subscribe(data => console.log('dogs concatMap: ', data.map(val => val.message)));
   }
  
   ngDoCheck() {
