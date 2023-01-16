@@ -2,7 +2,7 @@ import { DatePipe, KeyValue, KeyValuePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, QueryList, Renderer2, TemplateRef, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { NgModel } from '@angular/forms';
-import { concatMap, exhaustMap, filter, forkJoin, from, fromEvent, map, mergeMap, Observable, of, pipe, switchMap, tap } from 'rxjs';
+import { concatMap, exhaustMap, filter, forkJoin, from, fromEvent, interval, map, mergeMap, Observable, of, pipe, range, Subject, switchMap, take, takeLast, takeUntil, takeWhile, tap } from 'rxjs';
 import { CounterComponent } from './counter/counter.component';
 import { Customer } from './customer/model/customer';
 import { CustomDecorator } from './decorators/decorator';
@@ -347,6 +347,27 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       })
     )
     .subscribe(data => console.log('dogs exhaustMap: ', data.map(val => val.message)));
+
+    of(1, 2, 3, 4, 5)
+    .pipe(
+      // takes only first 2 values
+      take(2)
+    )
+    .subscribe(value => console.log('take: ', value))
+
+    of(1, 2, 3, 2, 1, 3, 2, 1)
+    .pipe(
+      // discards the rest of the stream if receives a value that doesn't pass the predicate
+      takeWhile(value => value < 3)
+    )
+    .subscribe(value => console.log('takeWhile: ', value));
+
+    range(0, 100)
+    .pipe(
+      //waits for the source to complete, then emits last n values
+      takeLast(3)
+    )
+    .subscribe(val => console.log('takeLast: ', val));
   }
  
   ngDoCheck() {
@@ -402,6 +423,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   private buttonSubscription: any
   private sourceObs = of(1, 2, 3, 4);
   private innerObs = of('A', 'B', 'C', 'D');
+  private notifier = new Subject();
+  private obs1 = interval(1000).pipe(takeUntil(this.notifier));
 
   private $dogsBreed(): Observable<any> {
     return this.http.get<any>('https://dog.ceo/api/breeds/list/all');
@@ -422,6 +445,15 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       })
     )
     .subscribe();
+  }
+
+  startObservable() {
+    this.obs1.subscribe((val: any) => console.log('takeUntil: ', val));
+  }
+
+  stopObservable() {
+    this.notifier.next(undefined);
+    this.notifier.complete();
   }
 }
 
