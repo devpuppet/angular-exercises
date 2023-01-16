@@ -2,7 +2,7 @@ import { DatePipe, KeyValue, KeyValuePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, QueryList, Renderer2, TemplateRef, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { NgModel } from '@angular/forms';
-import { concatMap, exhaustMap, filter, first, forkJoin, from, fromEvent, interval, last, map, mergeMap, Observable, of, pipe, range, scan, single, skip, skipLast, skipUntil, skipWhile, Subject, switchMap, take, takeLast, takeUntil, takeWhile, tap, timer } from 'rxjs';
+import { concatMap, exhaustMap, filter, first, forkJoin, from, fromEvent, interval, last, map, mergeMap, Observable, of, pipe, range, reduce, scan, single, skip, skipLast, skipUntil, skipWhile, Subject, switchMap, take, takeLast, takeUntil, takeWhile, tap, timer } from 'rxjs';
 import { CounterComponent } from './counter/counter.component';
 import { Customer } from './customer/model/customer';
 import { CustomDecorator } from './decorators/decorator';
@@ -401,8 +401,14 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     of(10,21,3,14,5,6,7,8).pipe(skipLast(4)).subscribe(val => console.log('skipLast 4: ', val));
 
     of(1,2,3,4,5)
+    // scan returns intermediate, accumulated values
     .pipe(scan((acc, value) => acc + value, 0))
     .subscribe(val => console.log('scan: ', val));
+
+    of(1,2,3,4,5)
+    // reduce doesn't return intermediate, accumulated values
+    .pipe(reduce((acc, val) => val + acc, 0))
+    .subscribe(val => console.log('reduce: ', val));
   }
  
   ngDoCheck() {
