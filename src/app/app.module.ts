@@ -23,6 +23,8 @@ import { Card2Component } from './card2/card2.component';
 import { ShadowDomComponentComponent } from './shadow-dom-component/shadow-dom-component.component';
 import { Subpage1Component } from './subpage1/subpage1.component';
 import { Subpage2Component } from './subpage2/subpage2.component';
+import { TodoListComponent } from './todo-list/todo-list.component';
+import { TodoAddComponent } from './todo-add/todo-add.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { Subpage2Component } from './subpage2/subpage2.component';
     Card2Component,
     ShadowDomComponentComponent,
     Subpage1Component,
-    Subpage2Component
+    Subpage2Component,
+    TodoListComponent,
+    TodoAddComponent
   ],
   imports: [
     BrowserModule,

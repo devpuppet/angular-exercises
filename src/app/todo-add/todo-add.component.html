@@ -1,0 +1,8 @@
+<div>
+    <form [formGroup]="todoForm" (submit)="onSubmit()">
+        <p>
+            <input type="text" id="value" name="value" formControlName="value">
+            <button type="submit">Add Item</button>
+        </p>
+    </form>
+</div>
