@@ -2,7 +2,7 @@ import { DatePipe, KeyValue, KeyValuePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, QueryList, Renderer2, TemplateRef, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { FormControl, FormGroup, NgModel } from '@angular/forms';
-import { catchError, concatMap, debounce, debounceTime, delay, delayWhen, exhaustMap, filter, first, forkJoin, from, fromEvent, interval, last, map, mergeMap, Observable, of, pipe, range, reduce, retry, scan, single, skip, skipLast, skipUntil, skipWhile, Subject, Subscription, switchMap, take, takeLast, takeUntil, takeWhile, tap, throwError, timer } from 'rxjs';
+import { AsyncSubject, BehaviorSubject, catchError, concatMap, debounce, debounceTime, delay, delayWhen, exhaustMap, filter, first, forkJoin, from, fromEvent, interval, last, map, mergeMap, Observable, of, pipe, range, reduce, ReplaySubject, retry, scan, single, skip, skipLast, skipUntil, skipWhile, Subject, Subscription, switchMap, take, takeLast, takeUntil, takeWhile, tap, throwError, timer } from 'rxjs';
 import { CounterComponent } from './counter/counter.component';
 import { Customer } from './customer/model/customer';
 import { CustomDecorator } from './decorators/decorator';
@@ -512,6 +512,51 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     subject2$.subscribe(val => console.log('Sub1: ', val));
     subject2$.subscribe(val => console.log('Sub2: ', val));
     subject2$.next(Math.floor(Math.random() * 200) + 1);
+
+    // BehaviorSubject takes an initial value and stores last emitted value
+    const behaviorSubject$ = new BehaviorSubject(0);
+    behaviorSubject$.subscribe(val => console.log('Behavior Subject, Sub1: ', val));
+    behaviorSubject$.next(1);
+    behaviorSubject$.next(2);
+    behaviorSubject$.subscribe(val => console.log('Behavior Subject, Sub2: ', val));
+
+    // ReplaySubject - emits 'historical' values for new subscribers
+    const replaySubject$ = new ReplaySubject();
+    replaySubject$.next(1);
+    replaySubject$.subscribe(val => console.log('Replay subject, Sub1: ', val));
+    replaySubject$.next(2);
+    replaySubject$.subscribe(val => console.log('Replay subject, Sub2: ', val));
+    replaySubject$.complete();
+    replaySubject$.error("Error!");
+    replaySubject$.next(3);
+    replaySubject$.subscribe({
+      next(val: any) {
+        console.log('Replay subject, Sub3: ', val);
+      },
+      error(err: any) {
+        console.log('Replay subject, Sub3 (error): ', err);
+      }
+    });
+
+    // AsyncSubject - subscribers get the last emitted value (just before the complete)
+    const asyncSubject = new AsyncSubject();
+    asyncSubject.next(1);
+    asyncSubject.next(2);
+    asyncSubject.subscribe(val => console.log('Async subject, Sub1: ', val));
+    asyncSubject.next(3);
+    asyncSubject.subscribe(val => console.log('Async subject, Sub2: ', val));
+    asyncSubject.next(4);
+    asyncSubject.complete();
+    asyncSubject.error('Error!');
+    asyncSubject.next(5);
+    asyncSubject.subscribe({
+      next(val: any) {
+        console.log('Async subject, Sub3: ', val);
+      },
+      error(val: any) {
+        console.log('Async subject. Sub3 (error): ', val);
+      }
+    });
   }
  
   ngDoCheck() {
