@@ -2,7 +2,7 @@ import { DatePipe, KeyValue, KeyValuePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, QueryList, Renderer2, TemplateRef, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { FormControl, FormGroup, NgModel } from '@angular/forms';
-import { catchError, concatMap, debounce, debounceTime, delay, delayWhen, exhaustMap, filter, first, forkJoin, from, fromEvent, interval, last, map, mergeMap, Observable, of, pipe, range, reduce, scan, single, skip, skipLast, skipUntil, skipWhile, Subject, Subscription, switchMap, take, takeLast, takeUntil, takeWhile, tap, throwError, timer } from 'rxjs';
+import { catchError, concatMap, debounce, debounceTime, delay, delayWhen, exhaustMap, filter, first, forkJoin, from, fromEvent, interval, last, map, mergeMap, Observable, of, pipe, range, reduce, retry, scan, single, skip, skipLast, skipUntil, skipWhile, Subject, Subscription, switchMap, take, takeLast, takeUntil, takeWhile, tap, throwError, timer } from 'rxjs';
 import { CounterComponent } from './counter/counter.component';
 import { Customer } from './customer/model/customer';
 import { CustomDecorator } from './decorators/decorator';
@@ -463,6 +463,29 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       },
       error(err: any) {
         console.log('throwError (error): ', err);
+      }
+    })
+
+    of(1,2,3,"A",5).pipe(
+      map(val => {
+        if(isNaN(+val)) {
+          throw new Error('Not a number!!!');
+        }
+        return val;
+      }),
+      retry(1),
+      catchError((error, src) => {
+        console.log('Caught error, Rethrowing');
+        console.log('catchError src: ', src);
+        return of(0);
+      })
+    )
+    .subscribe({ 
+      next(val: any) {
+        console.log('catchError: ', val);
+      },
+      error(err: any) {
+        console.log('catchError (error): ', err);
       }
     })
   }
