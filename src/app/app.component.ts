@@ -488,6 +488,30 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         console.log('catchError (error): ', err);
       }
     })
+
+    // Hot observable - does not wait for a subscriber to emit the data. It starts emitting right away
+    // Thus values 1st and 2nd in below example are lost
+    const subject$ = new Subject();
+    subject$.next('1st');
+    subject$.next('2nd');
+    subject$.subscribe(data => console.log('Hot subscriber:', data));
+    subject$.next('3rd');
+
+    this.obs.subscribe(subject$);
+    subject$.complete();
+
+    // Subscription on observable createss a separate instance of the producer => separate subscribers get different values
+    const observable = new Observable<number>(subscriber => {
+      subscriber.next(Math.floor(Math.random() * 200) + 1);
+    })
+    observable.subscribe(val => console.log('Obs1: ', val));
+    observable.subscribe(val => console.log('Obs2: ', val));
+
+    // Subject maintains a list of subscribers => all subscribers get the same value
+    const subject2$ = new Subject();
+    subject2$.subscribe(val => console.log('Sub1: ', val));
+    subject2$.subscribe(val => console.log('Sub2: ', val));
+    subject2$.next(Math.floor(Math.random() * 200) + 1);
   }
  
   ngDoCheck() {
@@ -529,6 +553,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     this.customOperator
   );
 
+  // Cold observable - does not active producer until there is a subscriber. It produces the data only when there is a subscriber
   private obsWithError = new Observable<string>(observer => {
     observer.next('A');
     observer.next('B');
