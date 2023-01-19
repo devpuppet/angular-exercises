@@ -7,26 +7,10 @@
 </ul>
 
 <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
-
-    <div ngModelGroup="address">
-        <p>
-            <label for="city">City</label>
-            <input type="text" name="city" ngModel>
-          </p>
-       
-          <p>
-            <label for="street">Street</label>
-            <input type="text" name="street" ngModel>
-          </p>
-          <p>
-            <label for="pincode">Pin Code</label>
-            <input type="text" name="pincode" ngModel>
-          </p>
-    </div>
  
     <p>
       <label for="firstname">First Name</label>
-      <input type="text" id="firstname" name="firstname" ngModel #fname="ngModel">
+      <input type="text" id="firstname" name="firstname" ngModel #fname="ngModel" [(ngModel)]="contact.firstname">
     </p>
    
     <p>
@@ -59,9 +43,29 @@
       </option>
     </select>
     </p>
+
+    <div ngModelGroup="address">
+        <p>
+            <label for="city">City</label>
+            <input type="text" name="city" ngModel>
+          </p>
+       
+          <p>
+            <label for="street">Street</label>
+            <input type="text" name="street" ngModel>
+          </p>
+          <p>
+            <label for="pincode">Pin Code</label>
+            <input type="text" name="pincode" ngModel>
+          </p>
+    </div>
    
     <p>
       <button type="submit">Submit</button>
+      <button type="button" (click)="setDefaults()">Set Defaults</button>
+      <button type="button" (click)="reset(contactForm)">Reset</button>
+      <button type="button" (click)="patch()">Patch</button>
+      <button type="button" (click)="patchNested()">Patch Address</button>
     </p>
    
   </form>
