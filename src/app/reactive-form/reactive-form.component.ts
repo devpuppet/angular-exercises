@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-reactive-form',
   templateUrl: './reactive-form.component.html',
   styleUrls: ['./reactive-form.component.css']
 })
-export class ReactiveFormComponent implements OnInit {
+export class ReactiveFormComponent implements OnInit, OnDestroy {
   // this is one way to create a form
   // contactForm = new FormGroup({
   //   firstname: new FormControl('', [Validators.required, Validators.minLength(2)]),
@@ -22,6 +23,7 @@ export class ReactiveFormComponent implements OnInit {
   //   })
   // });
   contactForm: FormGroup;
+  statusChanges$!: Subscription;
 
   //another way to create a form is via FormBuilder
   constructor(private formBuilder: FormBuilder) {
@@ -49,6 +51,12 @@ export class ReactiveFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.contactForm.get('firstname')?.valueChanges.subscribe(val => console.log('firstname value changes:', val));
+    this.contactForm.statusChanges.subscribe(val => console.log('Form status changes:', val))
+  }
+
+  ngOnDestroy(): void {
+    this.statusChanges$.unsubscribe();
   }
 
   onSubmit() {
