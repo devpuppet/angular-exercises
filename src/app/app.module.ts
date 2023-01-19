@@ -26,6 +26,7 @@ import { Subpage2Component } from './subpage2/subpage2.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoAddComponent } from './todo-add/todo-add.component';
 import { TemplateDrivenFormComponent } from './template-driven-form/template-driven-form.component';
+import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { TemplateDrivenFormComponent } from './template-driven-form/template-dri
     Subpage2Component,
     TodoListComponent,
     TodoAddComponent,
-    TemplateDrivenFormComponent
+    TemplateDrivenFormComponent,
+    ReactiveFormComponent
   ],
   imports: [
     BrowserModule,
