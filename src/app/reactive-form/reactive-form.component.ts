@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-reactive-form',
@@ -24,6 +24,8 @@ export class ReactiveFormComponent implements OnInit, OnDestroy {
   // });
   contactForm: FormGroup;
   statusChanges$!: Subscription;
+  firstnameValueChanges!: Subscription;
+  firstnameStatusChanges!: Subscription;
 
   //another way to create a form is via FormBuilder
   constructor(private formBuilder: FormBuilder) {
@@ -51,16 +53,23 @@ export class ReactiveFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.contactForm.get('firstname')?.valueChanges.subscribe(val => console.log('firstname value changes:', val));
-    this.contactForm.statusChanges.subscribe(val => console.log('Form status changes:', val))
+    this.firstnameValueChanges = this.contactForm.get('firstname')!.valueChanges.subscribe(val => console.log('firstname value changes:', val));
+    this.firstnameStatusChanges = this.contactForm.get('firstname')!.statusChanges.subscribe(val => console.log('firstname status changes:', val));
+    this.statusChanges$ = this.contactForm.statusChanges.subscribe(val => console.log('Form status changes:', val))
   }
 
   ngOnDestroy(): void {
+    this.firstnameValueChanges.unsubscribe();
+    this.firstnameStatusChanges.unsubscribe();
     this.statusChanges$.unsubscribe();
   }
 
   onSubmit() {
     console.log('Reactive form: ', this.contactForm.value);
+  }
+
+  setInvalidFirstNameWithoutStatusChange() {
+    this.contactForm.get('firstname')?.setValue('A', { emitEvent: false });
   }
 
 }
