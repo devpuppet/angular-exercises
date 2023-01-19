@@ -25,6 +25,7 @@ import { Subpage1Component } from './subpage1/subpage1.component';
 import { Subpage2Component } from './subpage2/subpage2.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoAddComponent } from './todo-add/todo-add.component';
+import { TemplateDrivenFormComponent } from './template-driven-form/template-driven-form.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { TodoAddComponent } from './todo-add/todo-add.component';
     Subpage1Component,
     Subpage2Component,
     TodoListComponent,
-    TodoAddComponent
+    TodoAddComponent,
+    TemplateDrivenFormComponent
   ],
   imports: [
     BrowserModule,
