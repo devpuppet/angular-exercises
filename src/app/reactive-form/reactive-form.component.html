@@ -1,15 +1,36 @@
 <h4>Reactive Form</h4>
-<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
  
     <p>
       <label for="firstname">First Name </label>
-      <input type="text" id="firstname" name="firstname" formControlName="firstname">
+      <input type="text" id="firstname" name="firstname" formControlName="firstname" class="form-control">
     </p>
+
+    <div *ngIf="!firstname?.valid && (firstname?.dirty || firstname?.touched)" class="error">
+        <div [hidden]="!firstname?.errors?.['required']">
+            First Name is required
+        </div>
+        <div [hidden]="!firstname?.errors?.['minlength']">
+            Min Length is {{firstname?.errors?.['minlength'].requiredLength}}
+        </div>
+    </div>
    
     <p>
       <label for="lastname">Last Name </label>
       <input type="text" id="lastname" name="lastname" formControlName="lastname">
     </p>
+
+    <div *ngIf="!lastname?.valid && (lastname?.dirty ||lastname?.touched)" class="error">
+        <div [hidden]="!lastname?.errors?.['pattern']">
+          Only characters are allowed
+        </div>
+        <div [hidden]="!lastname?.errors?.['maxlength']">
+          Max length allowed is {{lastname?.errors?.['maxlength']?.requiredLength}} 
+        </div>
+        <div [hidden]="!lastname?.errors?.['required']">
+          Last Name is required
+        </div>
+    </div>
    
     <p>
       <label for="email">Email </label>
