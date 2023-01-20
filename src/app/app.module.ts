@@ -28,6 +28,7 @@ import { TodoAddComponent } from './todo-add/todo-add.component';
 import { TemplateDrivenFormComponent } from './template-driven-form/template-driven-form.component';
 import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 import { SkillsFormComponent } from './skills-form/skills-form.component';
+import { EmployeeFormComponent } from './employee-form/employee-form.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { SkillsFormComponent } from './skills-form/skills-form.component';
     TodoAddComponent,
     TemplateDrivenFormComponent,
     ReactiveFormComponent,
-    SkillsFormComponent
+    SkillsFormComponent,
+    EmployeeFormComponent
   ],
   imports: [
     BrowserModule,
