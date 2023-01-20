@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -68,8 +68,17 @@ export class ReactiveFormComponent implements OnInit, OnDestroy {
     console.log('Reactive form: ', this.contactForm.value);
   }
 
+  reset() {
+    this.contactForm.reset();
+  }
+
   setInvalidFirstNameWithoutStatusChange() {
     this.contactForm.get('firstname')?.setValue('A', { emitEvent: false });
+  }
+
+  markFirstNameAsTouched() {
+    // with onlyself:true , only firstname formControl is marked as touched
+    this.contactForm.get('firstname')?.markAsTouched({ onlySelf: true });
   }
 
 }

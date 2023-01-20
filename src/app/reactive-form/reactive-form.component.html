@@ -75,10 +75,16 @@
         </p>
      
       </div>
+
+      <div>
+        First Name Form Control has errors: {{ firstname?.hasError('required') }}
+      </div>
    
     <p>
       <button type="submit">Submit</button>
+      <button (click)="reset()">Reset</button>
       <button (click)="setInvalidFirstNameWithoutStatusChange()">Set invalid first name without status change</button>
+      <button (click)="markFirstNameAsTouched()">Mark First Name as Touched</button>
     </p>
    
   </form>
