@@ -1,0 +1,15 @@
+<h4>Select options form</h4>
+<form [formGroup]="contactForm" (ngSubmit)="submit()">
+    <p>
+        <select formControlName="country">
+            <option [ngValue]="null" disabled>Select Country</option>
+            <option *ngFor="let country of countries" [ngValue]="country.id">{{ country.name }}</option>
+        </select>
+
+        <button type="submit">Submit</button>
+    </p>
+</form>
+<p>
+    <input type='text' [(ngModel)]="countryName">
+    <button (click)="addCountry()">Add Country</button>
+</p>

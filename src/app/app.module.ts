@@ -29,6 +29,7 @@ import { TemplateDrivenFormComponent } from './template-driven-form/template-dri
 import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 import { SkillsFormComponent } from './skills-form/skills-form.component';
 import { EmployeeFormComponent } from './employee-form/employee-form.component';
+import { ContactFormComponent } from './contact-form/contact-form.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { EmployeeFormComponent } from './employee-form/employee-form.component';
     TemplateDrivenFormComponent,
     ReactiveFormComponent,
     SkillsFormComponent,
-    EmployeeFormComponent
+    EmployeeFormComponent,
+    ContactFormComponent
   ],
   imports: [
     BrowserModule,
