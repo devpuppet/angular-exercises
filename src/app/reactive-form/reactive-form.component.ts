@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { country, pincode } from '../validators/custom-validator';
 
 @Component({
   selector: 'app-reactive-form',
@@ -41,11 +42,11 @@ export class ReactiveFormComponent implements OnInit, OnDestroy {
       email: ['', [Validators.required, Validators.email]],
       gender: ['', [Validators.required]],
       isMarried: [false, [Validators.required]],
-      country: ['', [Validators.required]],
+      country: ['', [country]],
       address: this.formBuilder.group({
         city: ['', [Validators.required]],
         street: ['', [Validators.required]],
-        pincode: ['', [Validators.required]]
+        pincode: ['', [Validators.required, pincode]]
       })
     })
   }
@@ -72,6 +73,10 @@ export class ReactiveFormComponent implements OnInit, OnDestroy {
 
   get country() {
     return this.contactForm.get('country');
+  }
+
+  get pincode() {
+    return this.contactForm.get('address.pincode');
   }
 
   ngOnInit(): void {
