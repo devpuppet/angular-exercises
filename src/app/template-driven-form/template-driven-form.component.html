@@ -6,12 +6,21 @@
     <li style="color: red">Unit testing is a challenge</li>
 </ul>
 
-<form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
+<form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)" novalidate>
  
     <p>
       <label for="firstname">First Name</label>
-      <input type="text" id="firstname" name="firstname" ngModel #fname="ngModel" [(ngModel)]="contact.firstname">
+      <input type="text" id="firstname" name="firstname" ngModel #fname="ngModel" [(ngModel)]="contact.firstname"
+      required minlength="10" maxlength="20" pattern="^[a-zA-Z]+$">
     </p>
+    <div *ngIf="!fname?.valid && (fname?.dirty || fname?.touched)" class="error">
+      <div [hidden]="!fname?.errors?.['required']">
+          First Name is required
+      </div>
+      <div [hidden]="!fname?.errors?.['minlength']">
+          Min Length is {{fname?.errors?.['minlength'].requiredLength}}
+      </div>
+    </div>
    
     <p>
       <label for="lastname">Last Name</label>
@@ -20,7 +29,7 @@
    
     <p>
       <label for="email">Email </label>
-      <input type="text" id="email" name="email" ngModel>
+      <input type="text" id="email" name="email" ngModel required email>
     </p>
    
     <p>
@@ -61,7 +70,7 @@
     </div>
    
     <p>
-      <button type="submit">Submit</button>
+      <button type="submit" [disabled]="!contactForm.valid">Submit</button>
       <button type="button" (click)="setDefaults()">Set Defaults</button>
       <button type="button" (click)="reset(contactForm)">Reset</button>
       <button type="button" (click)="patch()">Patch</button>
