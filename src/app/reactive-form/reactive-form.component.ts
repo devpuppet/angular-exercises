@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { country, pincode } from '../validators/custom-validator';
+import { CityValidatorService } from '../validators/wrapper-service';
 
 @Component({
   selector: 'app-reactive-form',
@@ -35,7 +36,7 @@ export class ReactiveFormComponent implements OnInit, OnDestroy {
   ];
 
   //another way to create a form is via FormBuilder
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private cityValidatorService: CityValidatorService) {
     this.contactForm = this.formBuilder.group({
       firstname: ['', [Validators.required, Validators.minLength(5)]],
       lastname: ['', [Validators.required, Validators.maxLength(20), Validators.pattern("^[a-zA-Z]+$")]],
@@ -44,7 +45,7 @@ export class ReactiveFormComponent implements OnInit, OnDestroy {
       isMarried: [false, [Validators.required]],
       country: ['', [country(['Poland', 'USA'])]],
       address: this.formBuilder.group({
-        city: ['', [Validators.required]],
+        city: ['', [Validators.required, this.cityValidatorService.validCity()]],
         street: ['', [Validators.required]],
         pincode: ['', [Validators.required, pincode]]
       })
@@ -73,6 +74,10 @@ export class ReactiveFormComponent implements OnInit, OnDestroy {
 
   get country() {
     return this.contactForm.get('country');
+  }
+
+  get city() {
+    return this.contactForm.get('address.city');
   }
 
   get pincode() {
