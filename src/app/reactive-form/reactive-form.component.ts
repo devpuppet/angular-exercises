@@ -42,7 +42,7 @@ export class ReactiveFormComponent implements OnInit, OnDestroy {
       email: ['', [Validators.required, Validators.email]],
       gender: ['', [Validators.required]],
       isMarried: [false, [Validators.required]],
-      country: ['', [country]],
+      country: ['', [country(['Poland', 'USA'])]],
       address: this.formBuilder.group({
         city: ['', [Validators.required]],
         street: ['', [Validators.required]],

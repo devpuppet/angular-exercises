@@ -1,16 +1,15 @@
 import { AbstractControl, ValidationErrors } from "@angular/forms";
 
-const validCountries = ['Poland', 'USA', 'England']
+export function country(countries: string[]) {
+    return (control: AbstractControl): ValidationErrors | null => {
+        const value = control.value;
 
-export function country(control: AbstractControl): ValidationErrors | null {
-
-    const value = control.value;
-
-    if (!validCountries.includes(value)) {
-        return { 'country': true, 'requiredValue': validCountries.toString() }
+        if (!countries.includes(value)) {
+            return { 'country': true, 'requiredValue': countries.toString() }
+        }
+    
+        return null;
     }
-
-    return null;
 }
 
 export function pincode(control: AbstractControl): ValidationErrors | null {
