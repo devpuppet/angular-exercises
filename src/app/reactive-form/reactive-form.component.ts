@@ -27,6 +27,12 @@ export class ReactiveFormComponent implements OnInit, OnDestroy {
   firstnameValueChanges!: Subscription;
   firstnameStatusChanges!: Subscription;
 
+  countries = [
+    { id: 1, name: 'Poland' },
+    { id: 2, name: 'USA' },
+    { id: 3, name: 'England' }
+  ];
+
   //another way to create a form is via FormBuilder
   constructor(private formBuilder: FormBuilder) {
     this.contactForm = this.formBuilder.group({
@@ -34,7 +40,7 @@ export class ReactiveFormComponent implements OnInit, OnDestroy {
       lastname: ['', [Validators.required, Validators.maxLength(20), Validators.pattern("^[a-zA-Z]+$")]],
       email: ['', [Validators.required, Validators.email]],
       gender: ['', [Validators.required]],
-      isMarried: ['', [Validators.required]],
+      isMarried: [false, [Validators.required]],
       country: ['', [Validators.required]],
       address: this.formBuilder.group({
         city: ['', [Validators.required]],
@@ -50,6 +56,22 @@ export class ReactiveFormComponent implements OnInit, OnDestroy {
 
   get lastname() {
     return this.contactForm.get('lastname');
+  }
+
+  get email() {
+    return this.contactForm.get('email');
+  }
+
+  get gender() {
+    return this.contactForm.get('gender');
+  }
+
+  get isMarried() {
+    return this.contactForm.get('isMarried');
+  }
+
+  get country() {
+    return this.contactForm.get('country');
   }
 
   ngOnInit(): void {

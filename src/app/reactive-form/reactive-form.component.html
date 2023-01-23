@@ -66,22 +66,27 @@
         </div>
      
         <p>
-          <label for="country">country </label>
+          <label for="country">Country</label>
           <select id="country" name="country" formControlName="country">
-            <option value="1">Poland</option>
-            <option value="2">USA</option>
-            <option value="3">England</option>
+            <option [ngValue]="null" disabled>Select Country</option>
+            <option *ngFor="let country of countries" [ngValue]="country.id">{{ country.name }}</option>
           </select>
         </p>
      
       </div>
 
       <div>
-        First Name Form Control has errors: {{ firstname?.hasError('required') }}
+        First Name Form Control has errors: {{ firstname?.errors | json }}<br>
+        Last Name Form Control has errors: {{ lastname?.errors | json }}<br>
+        Email Form Control has errors: {{ email?.errors | json }}<br>
+        Gender Form Control has errors: {{ gender?.errors | json }}<br>
+        Is Married Form Control has errors: {{ isMarried?.errors | json }}<br>
+        Country Form Control has errors: {{ country?.errors | json }}<br>
+        Is Form valid: {{ contactForm.valid }}<br>
       </div>
    
     <p>
-      <button type="submit">Submit</button>
+      <button type="submit" [disabled]="!contactForm.valid">Submit</button>
       <button (click)="reset()">Reset</button>
       <button (click)="setInvalidFirstNameWithoutStatusChange()">Set invalid first name without status change</button>
       <button (click)="markFirstNameAsTouched()">Mark First Name as Touched</button>
