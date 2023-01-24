@@ -31,6 +31,7 @@ import { SkillsFormComponent } from './skills-form/skills-form.component';
 import { EmployeeFormComponent } from './employee-form/employee-form.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { StreetValidator } from './validators/template-validator';
+import { PasswordFormComponent } from './password-form/password-form.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { StreetValidator } from './validators/template-validator';
     SkillsFormComponent,
     EmployeeFormComponent,
     ContactFormComponent,
-    StreetValidator
+    StreetValidator,
+    PasswordFormComponent
   ],
   imports: [
     BrowserModule,
