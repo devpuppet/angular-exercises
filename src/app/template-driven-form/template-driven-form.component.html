@@ -61,8 +61,13 @@
        
           <p>
             <label for="street">Street</label>
-            <input type="text" name="street" ngModel>
+            <input type="text" name="street" ngModel #street="ngModel" streetValidator>
           </p>
+          <div *ngIf="!street.valid && (street.dirty ||street.touched)">
+            <div *ngIf="street?.errors?.['street']">
+              Street name should be [{{street.errors?.['requiredValue']}}]
+            </div>
+          </div>
           <p>
             <label for="pincode">Pin Code</label>
             <input type="text" name="pincode" ngModel>

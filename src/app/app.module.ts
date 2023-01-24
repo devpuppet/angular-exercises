@@ -30,6 +30,7 @@ import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 import { SkillsFormComponent } from './skills-form/skills-form.component';
 import { EmployeeFormComponent } from './employee-form/employee-form.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
+import { StreetValidator } from './validators/template-validator';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
     ReactiveFormComponent,
     SkillsFormComponent,
     EmployeeFormComponent,
-    ContactFormComponent
+    ContactFormComponent,
+    StreetValidator
   ],
   imports: [
     BrowserModule,
