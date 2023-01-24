@@ -1,0 +1,32 @@
+<h4>Dynamic Validators</h4>
+
+<form [formGroup]="myForm">
+ 
+    notify :
+  <select formControlName="notifyVia">
+    <option *ngFor="let item of notifyOptions" [ngValue]="item">{{item}}</option>
+  </select>
+  <br>
+  <br>
+   
+   
+  email :
+  <input type="text" formControlName= "email"/>
+  <br>
+  <br>
+  mobile :
+  <input type="text" formControlName= "mobile"/>
+  <br>
+  <br>
+   
+  <button type="submit" >Submit </button>
+  </form>
+   
+  <br>
+  <br>
+   
+  Form valid ---- {{myForm.valid}}  <br>
+   
+  email valid-- {{myForm.controls['email'].valid}}  <br>
+   
+  mobile valid -- {{myForm.controls['mobile'].valid}}  <br>

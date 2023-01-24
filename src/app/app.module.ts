@@ -32,6 +32,7 @@ import { EmployeeFormComponent } from './employee-form/employee-form.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { StreetValidator } from './validators/template-validator';
 import { PasswordFormComponent } from './password-form/password-form.component';
+import { DynamicValidatorsComponent } from './dynamic-validators/dynamic-validators.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { PasswordFormComponent } from './password-form/password-form.component';
     EmployeeFormComponent,
     ContactFormComponent,
     StreetValidator,
-    PasswordFormComponent
+    PasswordFormComponent,
+    DynamicValidatorsComponent
   ],
   imports: [
     BrowserModule,
