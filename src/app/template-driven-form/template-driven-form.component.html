@@ -61,7 +61,7 @@
        
           <p>
             <label for="street">Street</label>
-            <input type="text" name="street" ngModel #street="ngModel" streetValidator>
+            <input type="text" name="street" ngModel #street="ngModel" streetValidator streets="Bubbly,Happy">
           </p>
           <div *ngIf="!street.valid && (street.dirty ||street.touched)">
             <div *ngIf="street?.errors?.['street']">

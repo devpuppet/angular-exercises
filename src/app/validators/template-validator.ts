@@ -1,4 +1,4 @@
-import { Directive, OnInit } from "@angular/core";
+import { Directive, Input, OnInit } from "@angular/core";
 import { FormControl, NG_VALIDATORS, ValidationErrors, Validator } from "@angular/forms";
 
 @Directive({
@@ -6,13 +6,15 @@ import { FormControl, NG_VALIDATORS, ValidationErrors, Validator } from "@angula
     providers: [{ provide: NG_VALIDATORS, useExisting: StreetValidator, multi: true }]
 })
 export class StreetValidator implements Validator, OnInit {
-    private streets: string[] = ['Long', 'Short'];
+    @Input('streets') streets!: string;
 
     validate(control: FormControl): ValidationErrors | null {
+        const allowedStreets = this.streets.split(",");
+
         const street = control.value;
 
-        if (!this.streets.includes(street)) {
-            return { 'street': true, 'requiredValue': this.streets.toString() }
+        if (!allowedStreets.includes(street)) {
+            return { 'street': true, 'requiredValue': allowedStreets.toString() }
         }
 
         return null;
