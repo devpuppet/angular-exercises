@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { streetAsyncValidator } from '../validators/async-validator';
 import { country, pincode } from '../validators/custom-validator';
 import { CityValidatorService } from '../validators/wrapper-service';
 
@@ -46,7 +47,7 @@ export class ReactiveFormComponent implements OnInit, OnDestroy {
       country: ['', [country(['Poland', 'USA'])]],
       address: this.formBuilder.group({
         city: ['', [Validators.required, this.cityValidatorService.validCity()]],
-        street: ['', [Validators.required]],
+        street: ['', null, [streetAsyncValidator]],
         pincode: ['', [Validators.required, pincode]]
       })
     })
@@ -78,6 +79,10 @@ export class ReactiveFormComponent implements OnInit, OnDestroy {
 
   get city() {
     return this.contactForm.get('address.city');
+  }
+
+  get street() {
+    return this.contactForm.get('address.street');
   }
 
   get pincode() {
