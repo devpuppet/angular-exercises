@@ -9,10 +9,8 @@ import { ProductService } from '../services/product.service';
 })
 export class ProductsComponent {
   products: Product[] | undefined;
-  productService: ProductService;
 
-  constructor() {
-    this.productService = new ProductService();
+  constructor(private productService: ProductService) {
   }
 
   getProducts() {
