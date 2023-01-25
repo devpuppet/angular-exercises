@@ -35,6 +35,7 @@ import { PasswordFormComponent } from './password-form/password-form.component';
 import { DynamicValidatorsComponent } from './dynamic-validators/dynamic-validators.component';
 import { ProductsComponent } from './products/products.component';
 import { ProvidersExampleComponent } from './providers-example/providers-example.component';
+import { HttpClientExampleComponent } from './http-client-example/http-client-example.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { ProvidersExampleComponent } from './providers-example/providers-example
     PasswordFormComponent,
     DynamicValidatorsComponent,
     ProductsComponent,
-    ProvidersExampleComponent
+    ProvidersExampleComponent,
+    HttpClientExampleComponent
   ],
   imports: [
     BrowserModule,

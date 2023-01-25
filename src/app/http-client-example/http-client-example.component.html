@@ -1,0 +1,19 @@
+<h4>HTTP Client</h4>
+
+<table>
+    <thead>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>LOGIN</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let repo of (repos$ | async)">
+            <td>{{ repo.id }}</td>
+            <td>{{ repo.name }}</td>
+            <td>{{ repo.owner.login }}</td>
+            <td>
+                <img src="{{ repo.owner.avatar_url }}" class="icon">
+            </td>
+        </tr>
+    </tbody>
+</table>
