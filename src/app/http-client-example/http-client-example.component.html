@@ -2,6 +2,7 @@
 
 <input type="text" [value]="username" (input)="username=$any($event.target).value">
 <button (click)="loadRepos()">Load Repos</button>
+<span style="font-size: 12px"> Type 'mock' to get mocked data from HTTP interceptor</span>
 
 <div *ngIf="loading">Loading...</div>
 

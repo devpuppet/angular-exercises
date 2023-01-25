@@ -15,9 +15,8 @@ export class PeopleService {
   }
 
   addPerson(person: Person): Observable<any> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const body = JSON.stringify(person);
-    return this.http.post(`${this.baseUrl}people`, body, { headers });
+    return this.http.post(`${this.baseUrl}people`, body);
   }
 }
 

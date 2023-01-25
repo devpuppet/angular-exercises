@@ -12,8 +12,7 @@ export class GithubService {
 
   public getRepos(username: string, params?: HttpParams): Observable<Repo[]> {
     console.log('getRepos successful');
-    const headers = new HttpHeaders()
-      .set('Content-Type', 'application/json');
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json'} );
     return this.http.get<Repo[]>(`${this.baseUrl}users/${username}/repos`, { params, headers });
   }
 }

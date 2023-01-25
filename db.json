@@ -11,6 +11,18 @@
     {
       "name": "Peter",
       "id": 3
+    },
+    {
+      "name": "Mr Mouse",
+      "id": 4
+    },
+    {
+      "name": "Mr Hamster",
+      "id": 5
+    },
+    {
+      "name": "Mr Poppy",
+      "id": 6
     }
   ]
 }

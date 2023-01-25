@@ -24,7 +24,7 @@ export class HttpClientExampleComponent implements OnInit {
   }
 
   loadRepos() {
-    this.repos$ = this.githubService.getRepos(this.username, new HttpParams().set('sort', 'description'))
+    this.repos$ = this.githubService.getRepos(this.username, new HttpParams({ fromObject: { sort: 'description' }}))
     .pipe(
       catchError(err => {
         console.log('Error occured when getting repo', err);

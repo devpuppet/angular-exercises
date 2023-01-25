@@ -12,7 +12,7 @@ import { CustomIfDirective } from './directives/structural.directive';
 import { ToggleDirective } from './directives/toggle.directive';
 import { TooltipDirective } from './directives/tooltip.directive';
 import { TempConverterPipe } from './pipes/temp-converter.pipe';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DatePipe, KeyValuePipe } from '@angular/common';
 import { InitHookComponent } from './init-hook/init-hook.component';
 import { CardComponent } from './card/card.component';
@@ -36,6 +36,7 @@ import { DynamicValidatorsComponent } from './dynamic-validators/dynamic-validat
 import { ProductsComponent } from './products/products.component';
 import { ProvidersExampleComponent } from './providers-example/providers-example.component';
 import { HttpClientExampleComponent } from './http-client-example/http-client-example.component';
+import { HttpRequestInterceptor, HttpResponseInterceptor, MockRepoResponseInterceptor } from './services/http-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,25 @@ import { HttpClientExampleComponent } from './http-client-example/http-client-ex
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [DatePipe, KeyValuePipe],
+  providers: [
+    DatePipe,
+    KeyValuePipe,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpResponseInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: MockRepoResponseInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
