@@ -1,0 +1,16 @@
+{
+  "people": [
+    {
+      "id": 1,
+      "name": "Kamil Kukielka"
+    },
+    {
+      "id": 2,
+      "name": "Sara Kukielka"
+    },
+    {
+      "name": "Peter",
+      "id": 3
+    }
+  ]
+}
