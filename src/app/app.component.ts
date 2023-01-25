@@ -6,7 +6,9 @@ import { AsyncSubject, BehaviorSubject, catchError, concatMap, debounce, debounc
 import { CounterComponent } from './counter/counter.component';
 import { Customer } from './customer/model/customer';
 import { CustomDecorator } from './decorators/decorator';
+import { ToggleDirective } from './directives/toggle.directive';
 import { InitHookComponent } from './init-hook/init-hook.component';
+import { StreetService } from './services/street.service';
 
 @CustomDecorator({
   value: 'value from decorator'
@@ -14,7 +16,9 @@ import { InitHookComponent } from './init-hook/init-hook.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [ToggleDirective],
+  viewProviders: [StreetService]
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
   protected readonly firstName = 'Kamil';

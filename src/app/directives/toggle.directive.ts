@@ -6,7 +6,9 @@ import { Directive, ElementRef, HostListener } from "@angular/core";
 export class ToggleDirective {
     private selected = false;
 
-    constructor(private el: ElementRef) {}
+    constructor(private el: ElementRef) {
+        console.log('ToggleDirective constructed');
+    }
 
     @HostListener('click')
     private onClick() {

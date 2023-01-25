@@ -5,6 +5,10 @@ import { Pipe, PipeTransform } from "@angular/core";
 })
 export class TempConverterPipe implements PipeTransform {
 
+    constructor() {
+        console.log('TempConverterPipe constructed');
+    }
+
     transform(value: number, unit: string) {
         if (value && isNaN(value)) {
             return 'Enter a number';

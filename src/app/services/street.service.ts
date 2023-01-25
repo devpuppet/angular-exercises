@@ -5,7 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class StreetService {
 
-  constructor() { }
+  constructor() {
+    console.log('StreetService constructed');
+  }
 
   isValidStreet(value: string, requiredValues: string[]): boolean {
     return requiredValues.includes(value);
