@@ -1,5 +1,14 @@
 <h4>HTTP Client</h4>
 
+<input type="text" [value]="username" (input)="username=$any($event.target).value">
+<button (click)="loadRepos()">Load Repos</button>
+
+<div *ngIf="loading">Loading...</div>
+
+<div *ngIf="errorMessage">
+    <strong>Error!</strong> {{ errorMessage | json }}
+</div>
+
 <table>
     <thead>
         <th>ID</th>
