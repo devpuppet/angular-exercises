@@ -40,6 +40,7 @@ import { HttpRequestInterceptor, HttpResponseInterceptor, MockRepoResponseInterc
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 import { ErrorComponent } from './error/error.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { ErrorComponent } from './error/error.component';
     HttpClientExampleComponent,
     HomeComponent,
     ContactComponent,
-    ErrorComponent
+    ErrorComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,
