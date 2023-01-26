@@ -37,6 +37,9 @@ import { ProductsComponent } from './products/products.component';
 import { ProvidersExampleComponent } from './providers-example/providers-example.component';
 import { HttpClientExampleComponent } from './http-client-example/http-client-example.component';
 import { HttpRequestInterceptor, HttpResponseInterceptor, MockRepoResponseInterceptor } from './services/http-interceptor.service';
+import { HomeComponent } from './home/home.component';
+import { ContactComponent } from './contact/contact.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +73,10 @@ import { HttpRequestInterceptor, HttpResponseInterceptor, MockRepoResponseInterc
     DynamicValidatorsComponent,
     ProductsComponent,
     ProvidersExampleComponent,
-    HttpClientExampleComponent
+    HttpClientExampleComponent,
+    HomeComponent,
+    ContactComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

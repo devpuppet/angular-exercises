@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Product } from '../models/product';
 import { LoggerService } from './logger.service';
 
@@ -16,5 +16,9 @@ export class ProductService {
       new Product(2, 'Pen Drive', 49.50),
       new Product(3, 'Power Bank', 99.99),
     ];
+  }
+
+  public getProduct(id: number) {
+    return this.getProducts().find(product => product.id === id);
   }
 }

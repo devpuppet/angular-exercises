@@ -21,9 +21,10 @@ import { StreetService } from './services/street.service';
   viewProviders: [StreetService]
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
+  title = "Routing";
   protected readonly firstName = 'Kamil';
   protected readonly lastName = 'Kukiełka';
-  title = () => `${this.firstName} ${this.lastName}`;
+  fullName = () => `${this.firstName} ${this.lastName}`;
   color = "green";
   protected readonly items = [new Item('Is'), new Item('Angular'), new Item('So'), new Item('Cool?')];
   protected specificItem: Item | undefined;

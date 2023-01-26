@@ -1,7 +1,7 @@
 <h3>Interpolation</h3>
 
 <div>Ordinary interpolation: {{ firstName }} {{ lastName }}</div>
-<div>Interpolation as a function: {{ title() }}</div>
+<div>Interpolation as a function: {{ fullName() }}</div>
 
 <div>Enter your name
     <input (keyup)="0" #name>
@@ -12,13 +12,13 @@
         {{ item.name }}
     </li>
 </ul>
-<div ngNonBindable>Interpolation turned off: {{ title() }}</div>
-<div>Interpolation with pipe: {{ title() | uppercase }}</div>
+<div ngNonBindable>Interpolation turned off: {{ fullName() }}</div>
+<div>Interpolation with pipe: {{ fullName() | uppercase }}</div>
 <div>Safe navigation operator (displays empty string if variable is null): {{ specificItem?.name }}</div>
 <div>Non-null assertion (during compile time): {{ anotherSpecificItem!.name }}</div>
 
 <h3>Property binding</h3>
-<h5 [innerText]="title()" [style.color]="color"></h5>
+<h5 [innerText]="fullName()" [style.color]="color"></h5>
 <button [disabled]="isDisabled">Disabled</button>
 <img [src]="catUrl" [width]="catWidth" [height]="catHeight">
 
@@ -354,7 +354,26 @@
         <li><a [routerLink]="['/subpage2']" routerLinkActive="router-link-active">Subpage2</a></li>
     </ul>
 
-    <router-outlet></router-outlet>
+    <!-- <router-outlet></router-outlet> -->
+
+    <div class="container">
+ 
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" [routerLink]="['/']"><strong> {{title}} </strong></a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a [routerLink]="['home']">Home</a></li>
+                <li><a [routerLink]="['product']">Product</a></li>
+                <li><a [routerLink]="['contact']">Contact us</a></li>
+            </ul>
+          </div>
+        </nav>
+         
+         <router-outlet></router-outlet>
+         
+        </div>
 </div>
 
 <h3>RXJS</h3>
