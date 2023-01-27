@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Product } from '../models/product';
 import { ProductService } from '../services/product.service';
 
@@ -8,15 +9,23 @@ import { ProductService } from '../services/product.service';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
   products: Product[] | undefined;
+  numberOfProducts!: number | null;
 
   constructor(private productService: ProductService, private route: ActivatedRoute) {
     this.route.parent?.params.subscribe(params => console.log('params:', params));
   }
 
   getProducts() {
-    this.products = this.productService.getProducts();
+    this.products = this.productService.getProducts(this.numberOfProducts);
+  }
+
+  ngOnInit() {
+    this.route.queryParamMap.subscribe(params => {
+      const num = params.get('numberOfProducts');
+      this.numberOfProducts = num ? +num : null;
+    });
   }
 
 }

@@ -91,6 +91,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('btn', { static: false }) btn!: ElementRef;
 
+  numberOfProducts: number | undefined;
+
   constructor(public http: HttpClient, public datePipe: DatePipe, private renderer: Renderer2, private keyValuePipe: KeyValuePipe) {}
 
   ngAfterViewInit(): void {
