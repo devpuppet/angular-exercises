@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from '../models/product';
 import { ProductService } from '../services/product.service';
 
@@ -10,7 +11,8 @@ import { ProductService } from '../services/product.service';
 export class ProductsComponent {
   products: Product[] | undefined;
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, private route: ActivatedRoute) {
+    this.route.parent?.params.subscribe(params => console.log('params:', params));
   }
 
   getProducts() {

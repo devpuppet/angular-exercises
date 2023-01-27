@@ -9,13 +9,16 @@ import { Subpage1Component } from './subpage1/subpage1.component';
 import { Subpage2Component } from './subpage2/subpage2.component';
 
 const routes: Routes = [
-  { path:'', redirectTo:'home', pathMatch:'full' },
   { path:'home', component: HomeComponent },
   { path:'contact', component: ContactComponent },
-  { path:'product/:id', component: ProductDetailComponent },
-  { path:'product', component: ProductsComponent },
+  { path:'product', component: ProductsComponent,
+    children: [
+      { path:'detail/:id', component: ProductDetailComponent, outlet: 'detail' }
+    ]
+  },
   { path:'subpage1', component: Subpage1Component },
   { path:'subpage2', component: Subpage2Component },
+  { path:'', redirectTo:'home', pathMatch:'full' },
   { path:'**', component: ErrorComponent },
 ];
 
