@@ -2,12 +2,14 @@ import { DatePipe, KeyValue, KeyValuePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, QueryList, Renderer2, TemplateRef, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { FormControl, FormGroup, NgModel } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AsyncSubject, BehaviorSubject, catchError, concatMap, debounce, debounceTime, delay, delayWhen, exhaustMap, filter, first, forkJoin, from, fromEvent, interval, last, map, mergeMap, Observable, of, pipe, range, reduce, ReplaySubject, retry, scan, single, skip, skipLast, skipUntil, skipWhile, Subject, Subscription, switchMap, take, takeLast, takeUntil, takeWhile, tap, throwError, timer } from 'rxjs';
 import { CounterComponent } from './counter/counter.component';
 import { Customer } from './customer/model/customer';
 import { CustomDecorator } from './decorators/decorator';
 import { ToggleDirective } from './directives/toggle.directive';
 import { InitHookComponent } from './init-hook/init-hook.component';
+import { AuthService } from './services/auth.service';
 import { StreetService } from './services/street.service';
 
 @CustomDecorator({
@@ -93,7 +95,12 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   numberOfProducts: number | undefined;
 
-  constructor(public http: HttpClient, public datePipe: DatePipe, private renderer: Renderer2, private keyValuePipe: KeyValuePipe) {}
+  constructor(public http: HttpClient,
+    public datePipe: DatePipe,
+    private renderer: Renderer2,
+    private keyValuePipe: KeyValuePipe,
+    private authService: AuthService,
+    private router: Router) {}
 
   ngAfterViewInit(): void {
     console.log('template from child', this.templateFromChild);
@@ -659,6 +666,11 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   stopObservable() {
     this.notifier.next(undefined);
     this.notifier.complete();
+  }
+
+  logout() {
+    this.authService.logoutUser();
+    this.router.navigate(['home']);
   }
 }
 

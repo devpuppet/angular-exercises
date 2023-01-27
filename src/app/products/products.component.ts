@@ -10,7 +10,7 @@ import { ProductService } from '../services/product.service';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  products: Product[] | undefined;
+  products$: Observable<Product[]> | undefined;
   numberOfProducts!: number | null;
 
   constructor(private productService: ProductService, private route: ActivatedRoute) {
@@ -18,7 +18,7 @@ export class ProductsComponent implements OnInit {
   }
 
   getProducts() {
-    this.products = this.productService.getProducts(this.numberOfProducts);
+    this.products$ = this.productService.getProducts(this.numberOfProducts);
   }
 
   ngOnInit() {

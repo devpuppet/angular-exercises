@@ -1,4 +1,5 @@
 import { Component, Host, Inject, Injectable, InjectionToken, OnInit, Optional, Self, SkipSelf } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ToggleDirective } from '../directives/toggle.directive';
 import { Product } from '../models/product';
 import { TempConverterPipe } from '../pipes/temp-converter.pipe';
@@ -43,8 +44,8 @@ export const API_URL = new InjectionToken<string>('');
 })
 export class ProvidersExampleComponent implements OnInit {
   welcomeMessage: string;
-  realProducts: string[];
-  products: string[];
+  realProducts: Observable<Product[]>;
+  products: Observable<Product[]>;
   injectedUrl: string;
   temp: string;
   cities: string;
@@ -62,8 +63,8 @@ export class ProvidersExampleComponent implements OnInit {
     @Host() private streetService: StreetService // @Host first looks in providers of this component, next it looks in viewProviders of parent component
     ) {
       this.welcomeMessage = welcomeFunc();
-      this.realProducts = this.realProductService.getProducts().map(product => product.name);
-      this.products = this.productService.getProducts().map(product => product.name);
+      this.realProducts = this.realProductService.getProducts();;
+      this.products = this.productService.getProducts();
       this.loggerService.log("created");
       this.injectedUrl = this.apiUrl;
       this.temp = this.tempConveterPipe.transform(100, 'C');

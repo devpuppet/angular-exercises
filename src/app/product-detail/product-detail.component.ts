@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Product } from '../models/product';
 import { ProductService } from '../services/product.service';
 
@@ -11,7 +11,7 @@ import { ProductService } from '../services/product.service';
 })
 export class ProductDetailComponent implements OnInit, OnDestroy {
   id!: string | null;
-  product: Product | undefined;
+  product$!: Observable<Product | undefined>;
   routeSubscription!: Subscription;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private productService: ProductService) { }
@@ -20,7 +20,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     this.activatedRoute.paramMap.subscribe(params => {
       this.id = params.get('id');
       if (this.id) {
-        this.product = this.productService.getProduct(+this.id);
+        this.product$ = this.productService.getProduct(+this.id);
       }
     });
   }
