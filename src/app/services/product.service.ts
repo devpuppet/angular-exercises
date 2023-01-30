@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map, Observable, of, take } from 'rxjs';
+import { delay, map, Observable, of, take } from 'rxjs';
 import { Product } from '../models/product';
 import { LoggerService } from './logger.service';
 
@@ -21,14 +21,15 @@ export class ProductService {
     ]
   }
 
-  public getProducts(numberOfProducts?: number | null) {
+  public getProducts(numberOfProducts?: number | null): Observable<Product[]> {
 
     return of(this.products).pipe(
-      map(products => products.slice(0, numberOfProducts ?? 0))
+      map(products => products.slice(0, numberOfProducts ?? products.length)),
+      delay(1500)
     );
   }
 
   public getProduct(id: number): Observable<Product | undefined> {
-    return of(this.products.find(product => product.id === id));
+    return of(this.products.find(product => product.id === id)).pipe(delay(1500));
   }
 }

@@ -24,7 +24,11 @@ export class ProductsComponent implements OnInit {
   ngOnInit() {
     this.route.queryParamMap.subscribe(params => {
       const num = params.get('numberOfProducts');
-      this.numberOfProducts = num ? +num : null;
+      if (num) {
+        this.numberOfProducts = +num;
+      } else {
+        this.getProducts();
+      }
     });
   }
 

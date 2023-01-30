@@ -46,6 +46,7 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductViewComponent } from './product-view/product-view.component';
 import { RegisterComponent } from './register/register.component';
+import { ProductWithResolverComponent } from './product-with-resolver/product-with-resolver.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { RegisterComponent } from './register/register.component';
     AddProductComponent,
     ProductEditComponent,
     ProductViewComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProductWithResolverComponent
   ],
   imports: [
     BrowserModule,

@@ -7,10 +7,12 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductViewComponent } from './product-view/product-view.component';
+import { ProductWithResolverComponent } from './product-with-resolver/product-with-resolver.component';
 import { ProductsComponent } from './products/products.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { DeactivateGuardService } from './services/deactivate-guard.service';
+import { ProductListResolverService } from './services/product-list-resolver.service';
 import { Subpage1Component } from './subpage1/subpage1.component';
 import { Subpage2Component } from './subpage2/subpage2.component';
 
@@ -19,6 +21,7 @@ const routes: Routes = [
   { path:'login', component: LoginComponent },
   { path:'contact', component: ContactComponent },
   { path:'register', component: RegisterComponent, canDeactivate: [DeactivateGuardService] },
+  { path: 'product-with-resolver', component: ProductWithResolverComponent, resolve: { products: ProductListResolverService } },
   { path:'product', component: ProductsComponent,
     canActivate: [AuthGuardService],
     canActivateChild: [AuthGuardService],
