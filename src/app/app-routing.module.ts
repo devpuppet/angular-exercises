@@ -8,7 +8,9 @@ import { LoginComponent } from './login/login.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductViewComponent } from './product-view/product-view.component';
 import { ProductsComponent } from './products/products.component';
+import { RegisterComponent } from './register/register.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { DeactivateGuardService } from './services/deactivate-guard.service';
 import { Subpage1Component } from './subpage1/subpage1.component';
 import { Subpage2Component } from './subpage2/subpage2.component';
 
@@ -16,6 +18,7 @@ const routes: Routes = [
   { path:'home', component: HomeComponent },
   { path:'login', component: LoginComponent },
   { path:'contact', component: ContactComponent },
+  { path:'register', component: RegisterComponent, canDeactivate: [DeactivateGuardService] },
   { path:'product', component: ProductsComponent,
     canActivate: [AuthGuardService],
     canActivateChild: [AuthGuardService],

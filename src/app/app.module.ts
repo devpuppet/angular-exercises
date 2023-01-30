@@ -45,6 +45,7 @@ import { LoginComponent } from './login/login.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductViewComponent } from './product-view/product-view.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { ProductViewComponent } from './product-view/product-view.component';
     LoginComponent,
     AddProductComponent,
     ProductEditComponent,
-    ProductViewComponent
+    ProductViewComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

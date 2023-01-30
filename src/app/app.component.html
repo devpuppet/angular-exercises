@@ -366,6 +366,7 @@
                 <li><input type="text" placeholder="Number of products" (input)="numberOfProducts=$any($event.target).value"><a [routerLink]="['product']" [queryParams]="{ numberOfProducts: numberOfProducts }">Product</a></li>
                 <li><a [routerLink]="['contact']">Contact us</a></li>
                 <li><a [routerLink]="['login']">Login</a></li>
+                <li><a [routerLink]="['register']">Register</a></li>
                 <li><a [routerLink]="" (click)="logout()">Log out</a></li>
             </ul>
           </div>
