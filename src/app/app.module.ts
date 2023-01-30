@@ -42,6 +42,9 @@ import { ContactComponent } from './contact/contact.component';
 import { ErrorComponent } from './error/error.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { LoginComponent } from './login/login.component';
+import { AddProductComponent } from './add-product/add-product.component';
+import { ProductEditComponent } from './product-edit/product-edit.component';
+import { ProductViewComponent } from './product-view/product-view.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +83,10 @@ import { LoginComponent } from './login/login.component';
     ContactComponent,
     ErrorComponent,
     ProductDetailComponent,
-    LoginComponent
+    LoginComponent,
+    AddProductComponent,
+    ProductEditComponent,
+    ProductViewComponent
   ],
   imports: [
     BrowserModule,

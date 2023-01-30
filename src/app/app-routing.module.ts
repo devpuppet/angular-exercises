@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddProductComponent } from './add-product/add-product.component';
 import { ContactComponent } from './contact/contact.component';
 import { ErrorComponent } from './error/error.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductEditComponent } from './product-edit/product-edit.component';
+import { ProductViewComponent } from './product-view/product-view.component';
 import { ProductsComponent } from './products/products.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { Subpage1Component } from './subpage1/subpage1.component';
@@ -16,8 +18,11 @@ const routes: Routes = [
   { path:'contact', component: ContactComponent },
   { path:'product', component: ProductsComponent,
     canActivate: [AuthGuardService],
+    canActivateChild: [AuthGuardService],
     children: [
-      { path:'detail/:id', component: ProductDetailComponent, outlet: 'detail' }
+      { path: 'view/:id', component: ProductViewComponent },
+      { path: 'edit/:id', component: ProductEditComponent },
+      { path: 'add', component: AddProductComponent }
     ]
   },
   { path:'subpage1', component: Subpage1Component },
