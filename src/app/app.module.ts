@@ -49,6 +49,7 @@ import { RegisterComponent } from './register/register.component';
 import { ProductWithResolverComponent } from './product-with-resolver/product-with-resolver.component';
 import { DynamicRouteComponent } from './dynamic-route/dynamic-route.component';
 import { StaticRouteComponent } from './static-route/static-route.component';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -98,10 +99,11 @@ import { StaticRouteComponent } from './static-route/static-route.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AdminModule, // the order of imports is important
+    AppRoutingModule
   ],
   providers: [
     DatePipe,
