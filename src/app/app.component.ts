@@ -2,7 +2,7 @@ import { DatePipe, KeyValue, KeyValuePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, QueryList, Renderer2, TemplateRef, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { FormControl, FormGroup, NgModel } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 import { AsyncSubject, BehaviorSubject, catchError, concatMap, debounce, debounceTime, delay, delayWhen, exhaustMap, filter, first, forkJoin, from, fromEvent, interval, last, map, mergeMap, Observable, of, pipe, range, reduce, ReplaySubject, retry, scan, single, skip, skipLast, skipUntil, skipWhile, Subject, Subscription, switchMap, take, takeLast, takeUntil, takeWhile, tap, throwError, timer } from 'rxjs';
 import { CounterComponent } from './counter/counter.component';
 import { Customer } from './customer/model/customer';
@@ -100,7 +100,13 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     private renderer: Renderer2,
     private keyValuePipe: KeyValuePipe,
     private authService: AuthService,
-    private router: Router) {}
+    private router: Router) {
+      this.router.events
+        .pipe(
+          filter(event => event instanceof NavigationStart)
+        )
+        .subscribe(event => { console.log('Navigation Listener:', event) });
+    }
 
   ngAfterViewInit(): void {
     console.log('template from child', this.templateFromChild);
