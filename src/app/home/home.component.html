@@ -1,2 +1,25 @@
 <h4>Home Component</h4>
-<p>Welcome!</p>
+<p>Select component:</p>
+<div>
+    <ul>
+        <li>
+            <a [routerLink]="['/home/static']">Static Data Product</a>
+        </li>
+        <li>
+            <a [routerLink]="['/home/dynamic']" [state]=product>Dynamic Data Product</a>
+        </li>
+    </ul>
+
+    <p>Enter data for dynamic component:</p>
+    <p>
+        ID: <input type="text" [value]="product.id" (input)="product.id=$any($event.target).value">
+    </p>
+    <p>
+        Name: <input type="text" [value]="product.name" (input)="product.name=$any($event.target).value">
+    </p>
+    <p>
+        Price: <input type="number" [value]="product.price" (input)="product.price=$any($event.target).value">
+    </p>
+</div>
+
+<router-outlet></router-outlet>

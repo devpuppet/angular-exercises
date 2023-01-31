@@ -47,6 +47,8 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductViewComponent } from './product-view/product-view.component';
 import { RegisterComponent } from './register/register.component';
 import { ProductWithResolverComponent } from './product-with-resolver/product-with-resolver.component';
+import { DynamicRouteComponent } from './dynamic-route/dynamic-route.component';
+import { StaticRouteComponent } from './static-route/static-route.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +92,9 @@ import { ProductWithResolverComponent } from './product-with-resolver/product-wi
     ProductEditComponent,
     ProductViewComponent,
     RegisterComponent,
-    ProductWithResolverComponent
+    ProductWithResolverComponent,
+    DynamicRouteComponent,
+    StaticRouteComponent
   ],
   imports: [
     BrowserModule,
