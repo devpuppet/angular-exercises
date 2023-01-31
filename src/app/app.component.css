@@ -38,3 +38,7 @@ img {
 .box {
     border: 2px dashed green;
 }
+
+.active {
+    background-color: yellow;
+}
