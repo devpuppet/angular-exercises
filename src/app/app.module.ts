@@ -49,6 +49,7 @@ import { RegisterComponent } from './register/register.component';
 import { ProductWithResolverComponent } from './product-with-resolver/product-with-resolver.component';
 import { DynamicRouteComponent } from './dynamic-route/dynamic-route.component';
 import { StaticRouteComponent } from './static-route/static-route.component';
+import { CustomPreloadStrategy } from './modules/custom-preload-strategy';
 
 @NgModule({
   declarations: [
@@ -106,6 +107,7 @@ import { StaticRouteComponent } from './static-route/static-route.component';
   providers: [
     DatePipe,
     KeyValuePipe,
+    CustomPreloadStrategy,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpRequestInterceptor,

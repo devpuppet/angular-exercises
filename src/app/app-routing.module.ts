@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AddProductComponent } from './add-product/add-product.component';
 import { ContactComponent } from './contact/contact.component';
 import { DynamicRouteComponent } from './dynamic-route/dynamic-route.component';
 import { ErrorComponent } from './error/error.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { CustomPreloadStrategy } from './modules/custom-preload-strategy';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductViewComponent } from './product-view/product-view.component';
 import { ProductWithResolverComponent } from './product-with-resolver/product-with-resolver.component';
@@ -37,7 +38,7 @@ const routes: Routes = [
       { path: 'add', component: AddProductComponent }
     ]
   },
-  { path:'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+  { path:'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), data: { preload: true, delay: 5000 } },
   { path:'subpage1', component: Subpage1Component },
   { path:'subpage2', component: Subpage2Component },
   { path:'', redirectTo:'home', pathMatch:'full' },
@@ -45,7 +46,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  // Default preloadingStrategy is NoPreloading. You can set the strategy to preload all lazy modules
+  // imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: CustomPreloadStrategy })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
