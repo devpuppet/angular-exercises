@@ -37,6 +37,7 @@ const routes: Routes = [
       { path: 'add', component: AddProductComponent }
     ]
   },
+  { path:'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
   { path:'subpage1', component: Subpage1Component },
   { path:'subpage2', component: Subpage2Component },
   { path:'', redirectTo:'home', pathMatch:'full' },

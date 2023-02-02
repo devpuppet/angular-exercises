@@ -5,11 +5,11 @@ import { RightsComponent } from "./rights/rights.component";
 import { UserComponent } from "./user/user.component";
 
 const routes: Routes = [
-    { path: 'admin', component: DashboardComponent, 
+    { path: 'dashboard', component: DashboardComponent,
     children: [
         { path: 'user', component: UserComponent },
         { path: 'rights', component: RightsComponent }
-    ]}
+    ] },
 ];
 
 @NgModule({
