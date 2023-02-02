@@ -13,6 +13,7 @@ import { ProductWithResolverComponent } from './product-with-resolver/product-wi
 import { ProductsComponent } from './products/products.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { CanLoadGuard as CanLoadGuard } from './services/can-load.guard';
 import { DeactivateGuardService } from './services/deactivate-guard.service';
 import { ProductListResolverService } from './services/product-list-resolver.service';
 import { StaticRouteComponent } from './static-route/static-route.component';
@@ -38,6 +39,8 @@ const routes: Routes = [
       { path: 'add', component: AddProductComponent }
     ]
   },
+  // you can use below route to enable CanLoadGuard which will block /admin routes
+  // { path:'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), data: { preload: true, delay: 5000 }, canLoad: [CanLoadGuard] },
   { path:'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), data: { preload: true, delay: 5000 } },
   { path:'subpage1', component: Subpage1Component },
   { path:'subpage2', component: Subpage2Component },
