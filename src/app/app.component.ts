@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, QueryList, Renderer2, TemplateRef, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { FormControl, FormGroup, NgModel } from '@angular/forms';
 import { NavigationStart, Router } from '@angular/router';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { AsyncSubject, BehaviorSubject, catchError, concatMap, debounce, debounceTime, delay, delayWhen, exhaustMap, filter, first, forkJoin, from, fromEvent, interval, last, map, mergeMap, Observable, of, pipe, range, reduce, ReplaySubject, retry, scan, single, skip, skipLast, skipUntil, skipWhile, Subject, Subscription, switchMap, take, takeLast, takeUntil, takeWhile, tap, throwError, timer } from 'rxjs';
 import { CounterComponent } from './counter/counter.component';
 import { Customer } from './customer/model/customer';
@@ -94,6 +95,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   @ViewChild('btn', { static: false }) btn!: ElementRef;
 
   numberOfProducts: number | undefined;
+
+  faCoffee = faCoffee;
 
   constructor(public http: HttpClient,
     public datePipe: DatePipe,

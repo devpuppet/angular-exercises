@@ -50,6 +50,7 @@ import { ProductWithResolverComponent } from './product-with-resolver/product-wi
 import { DynamicRouteComponent } from './dynamic-route/dynamic-route.component';
 import { StaticRouteComponent } from './static-route/static-route.component';
 import { CustomPreloadStrategy } from './modules/custom-preload-strategy';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -102,7 +103,8 @@ import { CustomPreloadStrategy } from './modules/custom-preload-strategy';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FontAwesomeModule
   ],
   providers: [
     DatePipe,
