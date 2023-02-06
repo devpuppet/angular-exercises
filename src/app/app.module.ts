@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -51,6 +51,13 @@ import { DynamicRouteComponent } from './dynamic-route/dynamic-route.component';
 import { StaticRouteComponent } from './static-route/static-route.component';
 import { CustomPreloadStrategy } from './modules/custom-preload-strategy';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AppInitService } from './services/app-init.service';
+
+export function initApp(appInitService: AppInitService) {
+  return (): Promise<any> => {
+    return appInitService.init();
+  }
+}
 
 @NgModule({
   declarations: [
@@ -110,6 +117,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     DatePipe,
     KeyValuePipe,
     CustomPreloadStrategy,
+    {
+      provide: APP_INITIALIZER, useFactory: initApp, deps: [AppInitService], multi: true
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpRequestInterceptor,

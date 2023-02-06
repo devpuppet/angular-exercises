@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DeactivateComponent } from '../models/guards';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-register',
@@ -8,7 +9,7 @@ import { DeactivateComponent } from '../models/guards';
 })
 export class RegisterComponent implements DeactivateComponent {
 
-  constructor() { }
+  constructor(private location: Location) { }
 
   ngOnInit(): void {
   }
@@ -19,5 +20,10 @@ export class RegisterComponent implements DeactivateComponent {
     } else {
       return false;
     }
+  }
+
+  // Use Location Services, only when you need to manipulate the Router, without resulting in a page refresh.
+  goBack() {
+    this.location.back();
   }
 }
