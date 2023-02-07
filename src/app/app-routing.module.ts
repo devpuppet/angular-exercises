@@ -26,7 +26,7 @@ const routes: Routes = [
       { path:'static', component: StaticRouteComponent, data: { id: 1, name: 'Static name' } },
       { path:'dynamic', component: DynamicRouteComponent },
     ] },
-  { path:'login', component: LoginComponent },
+  { path:'login', component: LoginComponent, data: { title: 'Login comp', description: 'Login page desc', ogTitle: 'Title for social media. OG stands for Open Graph', robots: 'noindex, nofollow' } },
   { path:'contact', component: ContactComponent, data: { title: 'Title overriden by code in ContactComponent' } },
   { path:'register', component: RegisterComponent, canDeactivate: [DeactivateGuardService], data: { title: 'Register Title from Router' } },
   { path:'product-with-resolver', component: ProductWithResolverComponent, resolve: { products: ProductListResolverService } },

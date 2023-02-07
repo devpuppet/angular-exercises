@@ -13,7 +13,7 @@ import { InitHookComponent } from './init-hook/init-hook.component';
 import { AuthService } from './services/auth.service';
 import { StreetService } from './services/street.service';
 import { environment } from 'src/environments/environment';
-import { Title } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 
 @CustomDecorator({
   value: 'value from decorator'
@@ -109,7 +109,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     private authService: AuthService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private title: Title) {
+    private title: Title,
+    private meta: Meta) {
       this.router.events
         .pipe(
           filter(event => event instanceof NavigationStart)
@@ -313,6 +314,35 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         this.title.setTitle(data.title);
       })
     })
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    )
+    .subscribe(() => {
+      const route = this.getChild(this.activatedRoute);
+
+      route.data.subscribe((data: any) => {
+        this.title.setTitle(data.title ?? 'Unknown title!');
+
+        if (data.description) {
+          this.meta.updateTag({ name: 'description', content: data.description });
+        } else {
+          this.meta.removeTag("name='description'");
+        }
+
+        if (data.robots) {
+          this.meta.updateTag({ name: 'robots', content: data.robots })
+        } else {
+          this.meta.updateTag({ name: 'robots', content: "follow,index" })
+        }
+
+        if (data.ogTitle) {
+          this.meta.updateTag({ property: 'og:title', content: data.ogTitle })
+        } else {
+          this.meta.removeTag("property='og:title'")
+        }
+      });
+    });
 
     // RXJS
     const observer = {
