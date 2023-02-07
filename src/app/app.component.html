@@ -359,7 +359,7 @@
         <nav class="navbar navbar-default">
           <div class="container-fluid">
             <div class="navbar-header">
-              <a class="navbar-brand" [routerLink]="['/']"><strong> {{title}} </strong></a>
+              <a class="navbar-brand" [routerLink]="['/']"><strong> {{routingTitle}} </strong></a>
             </div>
             <ul class="nav navbar-nav">
                 <li><a [routerLink]="['home']" [routerLinkActive]="['active']">Home</a></li>
@@ -443,5 +443,8 @@
     API endpoint: {{ apiEndpoint }}
     <p>
         Use ng serve --configuration="production" command to run the application in prod mode
+    </p>
+    <p>
+        Use ng serve --configuration="test" command to run the custom "test" environment
     </p>
 </div>

@@ -2,7 +2,7 @@ import { DatePipe, KeyValue, KeyValuePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, QueryList, Renderer2, TemplateRef, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { FormControl, FormGroup, NgModel } from '@angular/forms';
-import { NavigationStart, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { AsyncSubject, BehaviorSubject, catchError, concatMap, debounce, debounceTime, delay, delayWhen, exhaustMap, filter, first, forkJoin, from, fromEvent, interval, last, map, mergeMap, Observable, of, pipe, range, reduce, ReplaySubject, retry, scan, single, skip, skipLast, skipUntil, skipWhile, Subject, Subscription, switchMap, take, takeLast, takeUntil, takeWhile, tap, throwError, timer } from 'rxjs';
 import { CounterComponent } from './counter/counter.component';
@@ -13,6 +13,7 @@ import { InitHookComponent } from './init-hook/init-hook.component';
 import { AuthService } from './services/auth.service';
 import { StreetService } from './services/street.service';
 import { environment } from 'src/environments/environment';
+import { Title } from '@angular/platform-browser';
 
 @CustomDecorator({
   value: 'value from decorator'
@@ -25,7 +26,7 @@ import { environment } from 'src/environments/environment';
   viewProviders: [StreetService]
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
-  title = "Routing";
+  routingTitle = "Routing";
   protected readonly firstName = 'Kamil';
   protected readonly lastName = 'Kukiełka';
   fullName = () => `${this.firstName} ${this.lastName}`;
@@ -106,7 +107,9 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     private renderer: Renderer2,
     private keyValuePipe: KeyValuePipe,
     private authService: AuthService,
-    private router: Router) {
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private title: Title) {
       this.router.events
         .pipe(
           filter(event => event instanceof NavigationStart)
@@ -292,9 +295,24 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   ngOnChanges() {
     console.log('AppComponent==>ngOnChanges');
   }
+
+  private getChild(activatedRoute: ActivatedRoute): ActivatedRoute {
+    return activatedRoute.firstChild ? this.getChild(activatedRoute.firstChild) : activatedRoute;
+  }
  
   ngOnInit() {
     console.log('AppComponent==>ngOnInit');
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    )
+    .subscribe(() => {
+      const route = this.getChild(this.activatedRoute);
+      route.data.subscribe((data: any) => {
+        console.log("NavigationEnd data", data);
+        this.title.setTitle(data.title);
+      })
+    })
 
     // RXJS
     const observer = {
