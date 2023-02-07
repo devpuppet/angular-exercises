@@ -1,6 +1,6 @@
 import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule, Title } from '@angular/platform-browser';
+import { BrowserModule, Meta, Title } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -124,6 +124,7 @@ export function initConfig(appConfigService: AppConfigService) {
     KeyValuePipe,
     CustomPreloadStrategy,
     Title,
+    Meta,
     {
       provide: ErrorHandler, useClass: GlobalErrorHandlerService
     },
