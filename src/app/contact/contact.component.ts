@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppConfigService } from '../services/app-config.service';
 
 @Component({
   selector: 'app-contact',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
+
+  apiConfig = AppConfigService.settings.apiServer;
 
   constructor() { }
 

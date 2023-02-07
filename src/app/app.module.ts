@@ -52,11 +52,16 @@ import { StaticRouteComponent } from './static-route/static-route.component';
 import { CustomPreloadStrategy } from './modules/custom-preload-strategy';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppInitService } from './services/app-init.service';
+import { AppConfigService } from './services/app-config.service';
 
 export function initApp(appInitService: AppInitService) {
   return (): Promise<any> => {
     return appInitService.init();
   }
+}
+
+export function initConfig(appConfigService: AppConfigService) {
+  return () => appConfigService.load();
 }
 
 @NgModule({
@@ -119,6 +124,9 @@ export function initApp(appInitService: AppInitService) {
     CustomPreloadStrategy,
     {
       provide: APP_INITIALIZER, useFactory: initApp, deps: [AppInitService], multi: true
+    },
+    {
+      provide: APP_INITIALIZER, useFactory: initConfig, deps: [AppConfigService], multi: true
     },
     {
       provide: HTTP_INTERCEPTORS,
