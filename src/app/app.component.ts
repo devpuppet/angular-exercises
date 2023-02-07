@@ -12,6 +12,7 @@ import { ToggleDirective } from './directives/toggle.directive';
 import { InitHookComponent } from './init-hook/init-hook.component';
 import { AuthService } from './services/auth.service';
 import { StreetService } from './services/street.service';
+import { environment } from 'src/environments/environment';
 
 @CustomDecorator({
   value: 'value from decorator'
@@ -98,6 +99,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   faCoffee = faCoffee;
 
+  apiEndpoint;
+
   constructor(public http: HttpClient,
     public datePipe: DatePipe,
     private renderer: Renderer2,
@@ -109,6 +112,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
           filter(event => event instanceof NavigationStart)
         )
         .subscribe(event => { console.log('Navigation Listener:', event) });
+
+        this.apiEndpoint = environment.apiEndPoint;
     }
 
   ngAfterViewInit(): void {
