@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -53,6 +53,7 @@ import { CustomPreloadStrategy } from './modules/custom-preload-strategy';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppInitService } from './services/app-init.service';
 import { AppConfigService } from './services/app-config.service';
+import { GlobalErrorHandlerService } from './services/global-error-handler.service';
 
 export function initApp(appInitService: AppInitService) {
   return (): Promise<any> => {
@@ -122,6 +123,9 @@ export function initConfig(appConfigService: AppConfigService) {
     DatePipe,
     KeyValuePipe,
     CustomPreloadStrategy,
+    {
+      provide: ErrorHandler, useClass: GlobalErrorHandlerService
+    },
     {
       provide: APP_INITIALIZER, useFactory: initApp, deps: [AppInitService], multi: true
     },
