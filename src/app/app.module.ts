@@ -54,6 +54,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppInitService } from './services/app-init.service';
 import { AppConfigService } from './services/app-config.service';
 import { GlobalErrorHandlerService } from './services/global-error-handler.service';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { ImageComponent } from './image/image.component';
 
 export function initApp(appInitService: AppInitService) {
   return (): Promise<any> => {
@@ -109,7 +111,8 @@ export function initConfig(appConfigService: AppConfigService) {
     RegisterComponent,
     ProductWithResolverComponent,
     DynamicRouteComponent,
-    StaticRouteComponent
+    StaticRouteComponent,
+    ImageComponent
   ],
   imports: [
     BrowserModule,
@@ -117,7 +120,8 @@ export function initConfig(appConfigService: AppConfigService) {
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    LazyLoadImageModule
   ],
   providers: [
     DatePipe,

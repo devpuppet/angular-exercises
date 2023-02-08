@@ -105,6 +105,12 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   hostName = "http://localhost:4200";
 
+  imageSrc1="https://images.dog.ceo/breeds/poodle-toy/n02113624_5584.jpg";
+  imageSrc2="https://images.dog.ceo/breeds/terrier-border/n02093754_175.jpg";
+  imageSrc3="https://images.dog.ceo/breeds/terrier-lakeland/n02095570_4188.jpg";
+  imageSrc4="https://images.dog.ceo/breeds/keeshond/n02112350_9431.jpg";
+  defaultImage = "https://images.unsplash.com/photo-1611915387288-fd8d2f5f928b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80";
+
   constructor(public http: HttpClient,
     public datePipe: DatePipe,
     private renderer: Renderer2,

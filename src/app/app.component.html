@@ -448,3 +448,13 @@
         Use ng serve --configuration="test" command to run the custom "test" environment
     </p>
 </div>
+
+<h3>Image Lazy Load</h3>
+<div>
+    <img height="200" width="200" [lazyLoad]="imageSrc1" [defaultImage]="defaultImage">
+    <img height="200" width="200" [lazyLoad]="imageSrc2">
+    <img height="200" width="200" [lazyLoad]="imageSrc3">
+    <img height="200" width="200" [lazyLoad]="imageSrc4">
+    <h4>Responsive image</h4>
+    <app-image></app-image>
+</div>
