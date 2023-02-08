@@ -14,6 +14,7 @@ import { AuthService } from './services/auth.service';
 import { StreetService } from './services/street.service';
 import { environment } from 'src/environments/environment';
 import { Meta, Title } from '@angular/platform-browser';
+import { SeoService } from './services/seo.service';
 
 @CustomDecorator({
   value: 'value from decorator'
@@ -102,6 +103,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   apiEndpoint;
 
+  hostName = "http://localhost:4200";
+
   constructor(public http: HttpClient,
     public datePipe: DatePipe,
     private renderer: Renderer2,
@@ -110,7 +113,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private title: Title,
-    private meta: Meta) {
+    private meta: Meta,
+    private seoService: SeoService) {
       this.router.events
         .pipe(
           filter(event => event instanceof NavigationStart)
@@ -341,6 +345,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         } else {
           this.meta.removeTag("property='og:title'")
         }
+
+        this.seoService.updateCanonicalUrl(this.hostName + '/mainpage');
       });
     });
 
